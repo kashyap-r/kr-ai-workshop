@@ -1,0 +1,19 @@
+https://jax-ml.github.io/scaling-book/
+
+Training LLMs can be difficult because the numbers are huge, the hardware is complex, and it’s hard to know where the bottlenecks are. How to Scale Your Model: A Systems View of LLMs on TPUs takes a very practical, systems-oriented approach to explain the performance side of LLMs like how Tensor Processing Units (TPUs) (and GPUs) work under the hood, how these devices communicate, and how LLMs actually run on real hardware. It also covers parallelism strategies for both training and inference to efficiently scale models at massive sizes.
+
+This resource stands out because the authors have actually worked on production-grade LLM systems themselves at Google, so they share their learnings.
+
+ 
+
+// Overview of Outline
+Part 0: Rooflines (understanding hardware constraints: flops, memory bandwidth, memory)
+Part 1: TPUs (how TPUs work and network together for multi-chip training)
+Part 2: Sharding (matrix multiplication, TPU communication costs)
+Part 3: Transformer math (calculating flops, bytes, and other critical metrics)
+Part 4: Training (parallelism strategies: data parallelism, fully-sharded data parallelism (FSDP), tensor parallelism, pipeline parallelism)
+Part 5: Training LLaMA (practical examples of training llama 3 on TPU v5p; cost, sharding, and size considerations)
+Part 6: Inference (latency considerations, efficient sampling and accelerator utilization)
+Part 7: Serving LLaMA (serving llama 3-70b models on TPU v5e; kv caches, batch sizes, sharding, and production latency estimates)
+Part 8: Profiling (practical optimization using XLA compiler and profiling tools)
+Part 9: JAX (programming TPUs efficiently with JAX)

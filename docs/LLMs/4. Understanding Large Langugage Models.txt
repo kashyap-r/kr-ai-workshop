@@ -1,0 +1,9 @@
+# 4. Understanding Large Language Models: Towards Rigorous and Targeted Interpretability Using Probing Classifiers and Self-Rationalisation
+
+Understanding Large Language Models: Towards Rigorous and Targeted Interpretability Using Probing Classifiers and Self-Rationalisation is not a typical textbook. It’s a doctoral thesis of Jenny Kunz from Linköping University, but it covers such a unique aspect of LLMs that it deserves a place in this list. She explores how large language models work and how we can better understand them.
+
+LLMs perform very well on many tasks, but it is not clear how they make their predictions. This thesis studies two ways to understand these models: looking at the internal layers using probing classifiers and examining the explanations models generate for their predictions. She also examines models that generate free-text explanations with their predictions, exploring which properties of these explanations actually help downstream tasks and which align with human intuition. This work is useful for researchers and engineers interested in creating more transparent and accountable AI systems.
+
+// Overview of Outline
+Understanding LLM layers with probing classifiers (analyzing information stored in each layer of the model, checking limitations of existing probing methods, creating stricter probing tests using changes in data, developing new ways to measure differences in what layers know)
+Explaining predictions with self-rationalising models (generating text explanations along with model predictions, comparing explanations with human ratings and task performance, studying which properties make explanations useful for tasks versus easy to understand, annotating explanations for human-like features and their effects on different users)

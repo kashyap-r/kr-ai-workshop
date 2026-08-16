@@ -1,0 +1,18 @@
+# 2. Speech and Language Processing
+ 
+If you want to understand NLP and LLMs deeply, Speech and Language Processing by Daniel Jurafsky and James H. Martin is one of the best resources. The 3rd edition draft (August 24, 2025 release) is fully updated to cover modern NLP, including Transformers, LLMs, automatic speech recognition (Whisper), and text-to-speech systems (EnCodec & VALL-E). Jurafsky and Martin are leaders in computational linguistics, and their book is widely used in top universities.
+
+It provides a clear, structured approach from the basics like tokens and embeddings to advanced topics such as LLM training, alignment, and conversation structure. The draft PDF is freely available, making it both practical and accessible.
+
+ 
+
+// Overview of Outline
+Volume I: Large Language Models
+Chapters 1–2: Introduction, words, tokens, and Unicode handling
+Chapters 3–5: N-gram LMs, Logistic Regression for text classification, and vector embeddings
+Chapters 6–8: Neural networks, LLMs, and Transformers — including sampling and training techniques
+Chapters 9–12: Post-training tuning, masked language models, IR & RAG, and machine translation
+Chapter 13: RNNs and LSTMs (optional ordering for learning sequence models)
+Chapters 14–16: Phonetics, speech feature extraction, automatic speech recognition (Whisper), and text-to-speech (EnCodec & VALL-E)
+Volume II: Annotating Linguistic Structure
+Chapters 17–25: Sequence labeling, POS & NER, CFGs, dependency parsing, information extraction, semantic role labeling, lexicons, coreference resolution, discourse coherence, and conversation structure

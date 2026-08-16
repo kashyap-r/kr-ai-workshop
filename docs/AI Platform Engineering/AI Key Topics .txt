@@ -1,0 +1,25 @@
+1. 🪙 Tokens & Tokenization
+2. 🧠 Embeddings
+3. 🔎 Vector Similarity Search
+4. 🗄️ Vector Databases
+5. 🌐 Semantic Search
+6. 🧩 Chunking Strategies
+7. 📚 RAG (Retrieval-Augmented Generation)
+8. 🪟 Context Window
+9. 🧑‍💻 Prompt Engineering
+10. ⚙️ System Prompts
+11. 👁️ Attention Mechanism
+12. 🤖 Transformers
+13. 📍 Positional Encoding
+14. 🔮 Next Token Prediction
+15. 🌡️ Temperature & Sampling
+16. 🌀 Hallucinations
+17. 🎯 Fine-Tuning
+18. 🪶 LoRA & PEFT
+19. ⚖️ Quantization
+20. 🛠️ Function Calling / Tool Calling
+21. 🧭 AI Agents
+22. 🔗 MCP (Model Context Protocol)
+23. 📊 Model Evaluation (LLM Evals)
+24. 🛡️ AI Guardrails
+25. 🚀 AI Inference & Serving 

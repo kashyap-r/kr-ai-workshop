@@ -1,0 +1,12 @@
+Published in early 2025, Foundations of Large Language Models is one of the most well-structured and conceptually clear books written for anyone who wants to actually understand how LLMs are built, trained, and aligned. The authors (Tong Xiao & Jingbo Zhu) are both well-known figures in natural language processing (NLP). Instead of rushing through every new architecture or trend, they carefully explain the core mechanisms behind modern models like GPT, BERT, and LLaMA.
+
+The book emphasizes foundational thinking: what pre-training actually means, how generative models function internally, why prompting strategies matter, and what “alignment” really involves when humans try to fine-tune machine behavior. I think it’s a thoughtful balance between theory and implementation, designed both for students and practitioners who want to build strong conceptual grounding before starting experimentation.
+
+ 
+
+// Overview of Outline
+Pre-training (overview, different paradigms, bert, practical aspects of adapting and applying pre-trained models, etc.)
+Generative models (decoder-only transformers, data preparation, distributed training, scaling laws, memory optimization, efficiency strategies, etc.)
+Prompting (principles of good prompt design, advanced prompting methods, techniques for optimizing prompts)
+Alignment (LLM alignment and RLHF, instruction tuning, reward modeling, preference optimization)
+Inference (guidance on decoding algorithms, evaluation metrics, efficient inference methods)

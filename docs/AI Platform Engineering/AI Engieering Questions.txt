@@ -1,0 +1,113 @@
+https://www.kdnuggets.com/the-5-free-must-read-books-for-every-ai-engineer
+
+
+AI Application Architecture 
+
+1. Design the architecture for an AI-powered customer support platform 
+
+2. How would you architect a multi-tenant GenAI application?
+
+3. Design an AI document processing platform for enterprises?
+
+4. How would you architect an AI meeting assistant?
+
+5. DEsign an AU powered search platform for internal company platform?
+
+6. How would you architect anAI email assistant?
+
+7. Design an AI-Powered Code-erview systems 
+
+8. How would you build a scalable AI content generation platform 
+
+9. Design a real-time AI translation platform 
+
+10. Architect an AI recommendation platform 
+
+LLM Architecture 
+
+1. Design the architecture of a production RAG application 
+
+2. How would you architect a multi-modal AI application 
+
+3. When would you use multiple LLMs in one system?
+
+4. How would you design an intellgent routing layer for LLMs?
+
+5. How would you build a conversational memory architecture?
+
+6. Design an architecture for long-document question answering?
+
+7. DEsign an architecture for AI agents collaborating on a task 
+
+8. How would you architect a multimodal AI Application
+
+9. How would you deisgn an LLM fallback strategy 
+
+10. HOw would you architect an enterprise AI gateway 
+
+Data Architecture 
+
+1. design a document ingestion architecture for millions of files. 
+
+2. How would you architect a real-time feature store ?
+
+3. DEsign a data-pipeline for coninuous embedding generation 
+
+4. How would you synchronize data between operational databases and vector databases ?
+
+5. DEsign an architecture for Semantic search indexing 
+
+6. How would you architect an AI data lake 
+
+7. Design a metadata management system for AI applications 
+
+8. HOw would you architect incremental indexing for enterprise documents 
+
+9. Design a scalable event-driven AI pipeline 
+
+10. HOw would you architect real-time data validation for ML systems 
+
+Cloud and Infrastructure Architecture 
+
+1. Design a GPU interfact architecture for multiple AI models. 
+
+2.  How would you architect GPU sharing across teams?
+
+3. Design an autoscaling architecture for AI Inference 
+
+4. How would you architect disaster recovery for AI applications?
+
+5. DEsign a multi-region AI deployment architecture 
+
+6. How woud you architect a highly -available vector database 
+
+7. DEsign model rgistry architecture 
+
+8. How would you architect a centralized prompt management service 
+
+9. Design an AI API Gateway architecture 
+
+10. HOw ouwld you architect workload isolation for multiple AI applications
+
+Security and Governance architecture 
+
+1. Design a secure architecture for enterprise AI applications
+
+2. How would you architect tenant isolationin a milti-tenant AI platform 
+
+3. DEsign an architecture to protect sensitive documents in RAG systems
+
+4. How would you architect AU audit logging 
+
+5. Design an AI governance framework for regulated industries 
+
+6. How would you architect promptversioning and approval workflows 
+
+7. DEsign a secure secrets management archtiecture for AI applications 
+
+8. How would you architect role-based access control for AI platforms 
+
+9. Design an architecture for monitoring AI policy violations 
+
+10. How would you architect human-in-the-loop approavl for critical AI decisions 
+
