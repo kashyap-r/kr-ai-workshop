@@ -20,15 +20,16 @@ gemini = GeminiClient(
     model="gemini-3.5-flash"
 )
 
-# groq = GroqClient(
-#     api_key=os.environ["GROQ_API_KEY"],
-#     model="Qwen/Qwen3.6-27B"
-# )
+groq = GroqClient(
+    api_key=os.environ["GROQ_API_KEY"],
+    model="Qwen/Qwen3.6-27B"
+)
+
 print("\n--- Ollama ---")
 print(ollama.generate(prompt))
 
 print("\n--- Gemini ---")
 print(gemini.generate(prompt))
 
-# print("\n--- Groq ---")
-# print(groq.generate(prompt))
+print("\n--- Groq ---")
+print(groq.generate(prompt))
