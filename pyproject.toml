@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-provider-llm-client"
+version = "0.1.0"
+description = "A multi-provider LLM client supporting Ollama, Gemini and Groq"
+requires-python = ">=3.10"
+dependencies = [
+    "ollama",
+    "google-genai",
+    "groq",
+    "python-dotenv"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

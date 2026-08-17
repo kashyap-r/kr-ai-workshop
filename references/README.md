@@ -1,1 +1,0 @@
-Well, this directory will contain all the code, borrowed from udemy or other sources for learning purposes
