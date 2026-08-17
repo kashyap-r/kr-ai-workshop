@@ -7,9 +7,11 @@ Change Description:
 """
 
 from groq import Groq
+
 from .base import LLMClient
 
-def GroqClient(LLMClient):
+class GroqClient(LLMClient):
+
     def __init__(self, api_key: str, model: str):
         self.client = Groq(api_key=api_key)
         self.model = model

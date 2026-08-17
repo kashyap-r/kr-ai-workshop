@@ -1,0 +1,21 @@
+# Python virtual environments
+**/.venv/
+
+# Python cache
+**/__pycache__/
+*.py[cod]
+
+# Environment / secrets
+**/.env
+**/.env.*
+!.env.example
+
+# Jupyter
+**/.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

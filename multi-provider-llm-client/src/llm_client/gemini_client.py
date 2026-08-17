@@ -9,7 +9,7 @@ Change Description:
 from google import genai
 from .base import LLMClient
 
-class GeminiClent (LLMClient):
+class GeminiClient (LLMClient):
     def __init__(self, api_key: str, model: str):
         self.client = genai.Client(api_key=api_key)
         self.model = model
