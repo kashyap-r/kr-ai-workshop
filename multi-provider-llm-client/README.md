@@ -104,8 +104,40 @@ Aug 18, 2026
         ├── multiplier = 2
         └── jitter = True
 
+7. Observability - What do we want to observe?
 
+    For every request, eventually we want something like:
+    Request
+        │
+        ├── Identity
+        │   └── request_id
+        │
+        ├── Provider
+        │   ├── provider
+        │   └── model
+        │
+        ├── Timing
+        │   ├── start_time
+        │   ├── end_time
+        │   ├── latency_ms
+        │   └── retry_delay_ms
+        │
+        ├── Execution
+        │   ├── attempts
+        │   ├── retries
+        │   └── success
+        │
+        ├── Usage
+        │   ├── input_tokens
+        │   ├── output_tokens
+        │   └── total_tokens
+        │
+        └── Failure
+            ├── error_type
+            └── error_message
 
+ To separate the responsibilites we wo;; introduce twpo more classes, LLMUsage and LLMMetrics
+ 
 Future - Add Helper and Logger Functions
 # Pending: So later we'll add configuration validation and safe logging.
 

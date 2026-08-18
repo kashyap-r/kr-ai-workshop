@@ -1,17 +1,15 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from .metrics import LLMMetrics, LLMUsage
+
 
 @dataclass
 class LLMResponse:
     text: str
     provider: str
     model: str
-    latency_ms: float
-    input_tokens: int | None = None
-    output_tokens: int | None = None
-    total_tokens: int | None = None
-
-    # metadata: dict | None = None
+    usage: LLMUsage | None = None
+    metrics: LLMMetrics | None = None
 
 class LLMClient(ABC):
     @abstractmethod

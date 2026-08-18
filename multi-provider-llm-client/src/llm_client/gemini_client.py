@@ -14,20 +14,18 @@ Update: Added error handling for various Gemini API errors, including authentica
         This allows users to handle these specific error cases more gracefully and provides more meaningful error messages.         
 """
 
-import time
-
 from google import genai
 from google.genai import types
-from google.genai import errors
+from google.genai.errors import ClientError
 
 from .base import LLMClient, LLMResponse
 from .errors import (
     AuthenticationError,
     ModelNotFoundError,
-    RateLimitError,
-    LLMConnectionError,
     ProviderError,
+    RateLimitError,
 )
+from .metrics import LLMUsage
 
 
 class GeminiClient(LLMClient):
@@ -41,46 +39,61 @@ class GeminiClient(LLMClient):
         self.client = genai.Client(
             api_key=api_key,
             http_options=types.HttpOptions(
-            timeout=int(timeout_seconds * 1000)
+                timeout=int(
+                    timeout_seconds * 1000
+                )
             ),
         )
+
         self.model = model
 
-    def generate(self, prompt: str) -> LLMResponse:
-
-        start = time.perf_counter()
+    def generate(
+        self,
+        prompt: str,
+    ) -> LLMResponse:
 
         try:
 
-            response = self.client.models.generate_content(
-                model=self.model,
-                contents=prompt,
+            response = (
+                self.client.models.generate_content(
+                    model=self.model,
+                    contents=prompt,
+                )
             )
 
-        except errors.ClientError as e:
+        except ClientError as e:
 
             status_code = getattr(
                 e,
-                "code",
+                "status_code",
                 None,
             )
 
             if status_code == 401:
 
                 raise AuthenticationError(
-                    "Gemini authentication failed."
+                    "Gemini authentication failed. "
+                    "Check GEMINI_API_KEY."
+                ) from e
+
+            if status_code == 403:
+
+                raise AuthenticationError(
+                    "Gemini authorization failed."
                 ) from e
 
             if status_code == 404:
 
                 raise ModelNotFoundError(
-                    f"Gemini model '{self.model}' was not found."
+                    f"Gemini model "
+                    f"'{self.model}' was not found."
                 ) from e
 
             if status_code == 429:
 
                 raise RateLimitError(
-                    "Gemini rate limit or quota exceeded."
+                    "Gemini rate limit or quota "
+                    "was exceeded."
                 ) from e
 
             raise ProviderError(
@@ -89,47 +102,54 @@ class GeminiClient(LLMClient):
                 status_code=status_code,
             ) from e
 
-        except errors.ServerError as e:
-
-            raise ProviderError(
-                f"Gemini server error: {e}"
-            ) from e
-
         except Exception as e:
+
             raise ProviderError(
-                f"Gemini API error: {e}",
+                f"Unexpected Gemini error: {e}",
                 provider="gemini",
-                status_code=status_code,
             ) from e
 
-        latency_ms = (
-            time.perf_counter() - start
-        ) * 1000
+        # ---------------------------------
+        # Token usage
+        # ---------------------------------
 
-        usage = getattr(
+        usage_metadata = getattr(
             response,
             "usage_metadata",
             None,
         )
 
+        input_tokens = getattr(
+            usage_metadata,
+            "prompt_token_count",
+            None,
+        )
+
+        output_tokens = getattr(
+            usage_metadata,
+            "candidates_token_count",
+            None,
+        )
+
+        total_tokens = getattr(
+            usage_metadata,
+            "total_token_count",
+            None,
+        )
+
+        usage = LLMUsage(
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=total_tokens,
+        )
+
+        # ---------------------------------
+        # Normalized response
+        # ---------------------------------
+
         return LLMResponse(
             text=response.text,
             provider="gemini",
             model=self.model,
-            latency_ms=latency_ms,
-            input_tokens=getattr(
-                usage,
-                "prompt_token_count",
-                None,
-            ),
-            output_tokens=getattr(
-                usage,
-                "candidates_token_count",
-                None,
-            ),
-            total_tokens=getattr(
-                usage,
-                "total_token_count",
-                None,
-            ),
+            usage=usage,
         )

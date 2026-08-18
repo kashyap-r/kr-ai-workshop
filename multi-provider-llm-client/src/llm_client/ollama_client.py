@@ -19,28 +19,38 @@ Update: Added latency measurement to the generate method. The time taken for the
         This allows users to see how long it took to generate a response from the model, which can be useful for performance monitoring and optimization.
 """
 
-import time
-
 from ollama import Client, ResponseError
 
 from .base import LLMClient, LLMResponse
 from .errors import (
-    ModelNotFoundError,
     LLMConnectionError,
+    ModelNotFoundError,
     ProviderError,
 )
+from .metrics import LLMUsage
 
 
 class OllamaClient(LLMClient):
 
-    def __init__(self, model: str, timeout_seconds: float):        
-        self.client = Client(host="http://localhost:11434", timeout=timeout_seconds,)
+    def __init__(
+        self,
+        model: str,
+        timeout_seconds: float,
+    ):
+        self.client = Client(
+            host="http://localhost:11434",
+            timeout=timeout_seconds,
+        )
+
         self.model = model
 
-    def generate(self, prompt: str) -> LLMResponse:
+    def generate(
+        self,
+        prompt: str,
+    ) -> LLMResponse:
 
-        start = time.perf_counter()
         try:
+
             response = self.client.chat(
                 model=self.model,
                 messages=[
@@ -52,18 +62,24 @@ class OllamaClient(LLMClient):
             )
 
         except ResponseError as e:
-            if getattr(e, "status_code", None) == 404:
+
+            status_code = getattr(
+                e,
+                "status_code",
+                None,
+            )
+
+            if status_code == 404:
+
                 raise ModelNotFoundError(
-                    f"Ollama model '{self.model}' was not found."
+                    f"Ollama model "
+                    f"'{self.model}' was not found."
                 ) from e
+
             raise ProviderError(
                 f"Ollama error: {e}",
                 provider="ollama",
-                status_code=getattr(
-                    e,
-                    "status_code",
-                    None,
-                ),
+                status_code=status_code,
             ) from e
 
         except Exception as e:
@@ -73,13 +89,46 @@ class OllamaClient(LLMClient):
                 "Is Ollama running?"
             ) from e
 
-        latency_ms = (
-            time.perf_counter() - start
-        ) * 1000
+        # ---------------------------------
+        # Token usage
+        # ---------------------------------
+
+        input_tokens = getattr(
+            response,
+            "prompt_eval_count",
+            None,
+        )
+
+        output_tokens = getattr(
+            response,
+            "eval_count",
+            None,
+        )
+
+        total_tokens = None
+
+        if (
+            input_tokens is not None
+            and output_tokens is not None
+        ):
+            total_tokens = (
+                input_tokens
+                + output_tokens
+            )
+
+        usage = LLMUsage(
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=total_tokens,
+        )
+
+        # ---------------------------------
+        # Normalized response
+        # ---------------------------------
 
         return LLMResponse(
             text=response.message.content,
             provider="ollama",
             model=self.model,
-            latency_ms=latency_ms,
+            usage=usage,
         )
