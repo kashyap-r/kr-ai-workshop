@@ -76,5 +76,25 @@ Aug 18, 2026
     - refine grok_client.py 
     - refine test_clients.py 
 
+5. Introducing Error Handling 
+    We shouldn't blindly catch every possible exception. We'll deliberately map:
+        Provider failure	        Our exception
+        Invalid API key	            AuthenticationError
+        Model unavailable	        ModelNotFoundError
+        429/quota	                RateLimitError
+        Network/Ollama unavailable	LLMConnectionError
+        Unexpected provider failure	ProviderError
+
+    The architecture will look like below .. 
+        Strategy → How do I execute an LLM request?
+
+        Factory → Which strategy should I use?
+
+        Adapter → How do I translate this provider's unique API into our common interface?
+
+        Error abstraction → How do I prevent provider-specific failures from leaking into the application?
 
 Future - Add Helper and Logger Functions
+# Pending: So later we'll add configuration validation and safe logging.
+
+6. 

@@ -20,8 +20,17 @@ Update: Added latency measurement to the generate method. The time taken for the
 """
 
 import time
+
 from ollama import chat
+from ollama import ResponseError
+
 from .base import LLMClient, LLMResponse
+from .errors import (
+    ModelNotFoundError,
+    LLMConnectionError,
+    ProviderError,
+)
+
 
 class OllamaClient(LLMClient):
 
@@ -32,15 +41,36 @@ class OllamaClient(LLMClient):
 
         start = time.perf_counter()
 
-        response = chat(
-            model=self.model,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
+        try:
+
+            response = chat(
+                model=self.model,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    }
+                ],
+            )
+
+        except ResponseError as e:
+
+            if getattr(e, "status_code", None) == 404:
+
+                raise ModelNotFoundError(
+                    f"Ollama model '{self.model}' was not found."
+                ) from e
+
+            raise ProviderError(
+                f"Ollama error: {e}"
+            ) from e
+
+        except Exception as e:
+
+            raise LLMConnectionError(
+                "Unable to connect to Ollama. "
+                "Is Ollama running?"
+            ) from e
 
         latency_ms = (
             time.perf_counter() - start

@@ -13,13 +13,6 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 @dataclass
 class LLMConfig:
-    # provider: str = os.environ.get("LLM_PROVIDER", "ollama")
-    # ollama_model: str = os.environ.get("OLLAMA_MODEL", "qwen3:8b")
-    # gemini_api_key: str = os.environ.get("GEMINI_API_KEY", "")
-    # gemini_model: str = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
-    # groq_api_key: str = os.environ.get("GROQ_API_KEY", "")
-    # groq_model: str = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
-
     provider: str
     ollama_model: str
     gemini_api_key: str | None
@@ -30,11 +23,21 @@ class LLMConfig:
 def load_config() -> LLMConfig:
     return LLMConfig(
         provider=os.getenv("LLM_PROVIDER", "ollama"),
-        ollama_model=os.getenv("OLLAMA_MODEL", "qwen3:8b"),
+        ollama_model=os.environ["OLLAMA_MODEL"],
         gemini_api_key=os.getenv("GEMINI_API_KEY"),
-        gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.5-flash"),
+        gemini_model=os.environ["GEMINI_MODEL"],
         groq_api_key=os.getenv("GROQ_API_KEY"),
-        groq_model=os.getenv("GROQ_MODEL", "openai/gpt-oss-20b"),    
+        groq_model=os.environ["GROQ_MODEL"]
     )
+    
 
-# Pending: So later we'll add configuration validation and safe logging.
+    # return LLMConfig(
+    #     provider=os.getenv("LLM_PROVIDER", "ollama"),
+    #     ollama_model=os.getenv("OLLAMA_MODEL", "qwen3:8b"),
+    #     gemini_api_key=os.getenv("GEMINI_API_KEY"),
+    #     gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.5-flash"),
+    #     groq_api_key=os.getenv("GROQ_API_KEY"),
+    #     groq_model=os.getenv("GROQ_MODEL", "openai/gpt-oss-20b"),    
+    # )
+# Warning: The model names here in the config are default names .i.e. it means Use GEMINI_MODEL from the environment if it exists; otherwise use gemini-3.5-flash from here. 
+# Same for the other models. So if you want to use a different model, you can set it in the .env file or change the default here.    

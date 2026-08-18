@@ -2,6 +2,7 @@ from llm_client.ollama_client import OllamaClient
 from llm_client.gemini_client import GeminiClient
 from llm_client.groq_client import GroqClient
 from llm_client.config import load_config
+from llm_client.errors import LLMError
 
 config = load_config()
 
@@ -27,13 +28,19 @@ for name, client in [
     ("Groq", groq),
 ]:
 
-    print(f"\n--- {name} ---")
+    try:
 
-    response = client.generate(prompt)
+        response = client.generate(prompt)
 
-    print(response.text)
-    print(f"Model: {response.model}")
-    print(f"Latency: {response.latency_ms:.2f} ms")
-    print(f"Input tokens: {response.input_tokens}")
-    print(f"Output tokens: {response.output_tokens}")
-    print(f"Total tokens: {response.total_tokens}")
+        print(response.text)
+        print(f"Model: {response.model}")
+        print(f"Latency: {response.latency_ms:.2f} ms")
+
+    except LLMError as e:
+        print(f"LLM request failed: {e}")
+
+    # print(f"Model: {response.model}")
+    # print(f"Latency: {response.latency_ms:.2f} ms")
+    # print(f"Input tokens: {response.input_tokens}")
+    # print(f"Output tokens: {response.output_tokens}")
+    # print(f"Total tokens: {response.total_tokens}")

@@ -13,30 +13,77 @@ Update: Added latency measurement to the generate method. The time taken for the
 import time
 
 from groq import Groq
+from groq import (
+    APIConnectionError,
+    APIStatusError,
+    AuthenticationError as GroqAuthenticationError,
+    NotFoundError,
+    RateLimitError as GroqRateLimitError,
+)
 
 from .base import LLMClient, LLMResponse
-
+from .errors import (
+    AuthenticationError,
+    ModelNotFoundError,
+    RateLimitError,
+    LLMConnectionError,
+    ProviderError,
+)
 
 class GroqClient(LLMClient):
 
-    def __init__( self, api_key: str, model: str):
-        self.client = Groq( api_key=api_key)
+    def __init__(self, api_key: str, model: str):
+        self.client = Groq(api_key=api_key)
         self.model = model
 
     def generate(self, prompt: str) -> LLMResponse:
+
         start = time.perf_counter()
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
+
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    }
+                ],
+            )
+        except GroqAuthenticationError as e:
+            raise AuthenticationError(
+                "Groq authentication failed."
+            ) from e
+
+        except NotFoundError as e:
+            raise ModelNotFoundError(
+                f"Groq model '{self.model}' was not found."
+            ) from e
+
+        except GroqRateLimitError as e:
+            raise RateLimitError(
+                "Groq rate limit or quota exceeded."
+            ) from e
+
+        except APIConnectionError as e:
+            raise LLMConnectionError(
+                "Unable to connect to Groq."
+            ) from e
+
+        except APIStatusError as e:
+            raise ProviderError(
+                f"Groq API error: {e}"
+            ) from e
+
+        except Exception as e:
+            raise ProviderError(
+                f"Unexpected Groq error: {e}"
+            ) from e
 
         latency_ms = (time.perf_counter() - start) * 1000
+
         usage = response.usage
+
         return LLMResponse(
             text=response.choices[0].message.content,
             provider="groq",
