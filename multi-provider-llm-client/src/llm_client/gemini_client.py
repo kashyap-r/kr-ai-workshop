@@ -39,7 +39,6 @@ class GeminiClient(LLMClient):
         self.client = genai.Client(
             api_key=api_key
         )
-
         self.model = model
 
     def generate(self, prompt: str) -> LLMResponse:

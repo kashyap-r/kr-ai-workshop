@@ -94,6 +94,18 @@ Aug 18, 2026
 
         Error abstraction → How do I prevent provider-specific failures from leaking into the application?
 
+6. Introduce retries
+    Starting with retry policy of 
+        RetryPolicy
+        │
+        ├── max_attempts = 3
+        ├── initial_delay = 1 sec
+        ├── max_delay = 10 sec
+        ├── multiplier = 2
+        └── jitter = True
+
+
+
 Future - Add Helper and Logger Functions
 # Pending: So later we'll add configuration validation and safe logging.
 
