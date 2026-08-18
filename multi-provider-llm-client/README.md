@@ -36,4 +36,45 @@ Aug 17, 2026 - Talk to LLMs
     It is somewhat like the INI file.   
 
 
-Aug 18, 2026 - Add Helper and Logger Functions
+Aug 18, 2026 
+1. Update Configuration
+    - Model name is hardcoded
+    - Credentials are mixed into application code 
+    - Provider configuration isn't configurable 
+
+    Solution: move configuration into .env 
+
+2. Create a configuration module
+    - create a new config.py containing the data class, gives us a structured configuration object 
+                    LLMConfig
+                    │
+       ┌────────────┼────────────┐
+    Provider      Models       Credentials
+       │            │            │
+    ollama       qwen3:8b       ...
+    gemini       gemini...      ...
+    groq         Qwen...        ...
+
+    Note: # So later we'll add configuration validation and safe logging. Check config.py
+
+3. Create LLMResponse 
+    - to capture metadata thrown by the LLM response 
+    - Data like 
+        provider
+        model
+        latency
+        input tokens
+        output tokens
+        total tokens    
+    Why do we need it?
+    The application gets the answer and the telemetry together and we need this information to establish benchmarks (Observability)
+    Solution: Make changes on the base.py 
+
+4. Latency - Each client should measure its own request duration 
+    - refine ollama_client.py: Ollama's response may contain token/timing information, but we aren't assuming its exact structure yet. We'll inspect it separately and add that in the next iteration. 
+    - refine gemini_client.py 
+    - refine grok_client.py 
+    - refine test_clients.py 
+
+
+Future - Add Helper and Logger Functions
