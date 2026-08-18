@@ -27,8 +27,19 @@ class LLMConnectionError(LLMError):
     pass
 
 class ProviderError(LLMError):
-    """Raised for general errors returned by the LLM provider."""
-    pass
+    """Unexpected provider/API failure."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        provider: str | None = None,
+        status_code: int | None = None,
+    ):
+        super().__init__(message)
+
+        self.provider = provider
+        self.status_code = status_code
 
 class InvalidRequestError(LLMError):
     """Raised when the request to the LLM provider is invalid."""

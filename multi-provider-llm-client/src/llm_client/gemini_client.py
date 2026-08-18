@@ -17,6 +17,7 @@ Update: Added error handling for various Gemini API errors, including authentica
 import time
 
 from google import genai
+from google.genai import types
 from google.genai import errors
 
 from .base import LLMClient, LLMResponse
@@ -35,9 +36,13 @@ class GeminiClient(LLMClient):
         self,
         api_key: str,
         model: str,
+        timeout_seconds: float,
     ):
         self.client = genai.Client(
-            api_key=api_key
+            api_key=api_key,
+            http_options=types.HttpOptions(
+            timeout=int(timeout_seconds * 1000)
+            ),
         )
         self.model = model
 
@@ -79,7 +84,9 @@ class GeminiClient(LLMClient):
                 ) from e
 
             raise ProviderError(
-                f"Gemini API error: {e}"
+                f"Gemini API error: {e}",
+                provider="gemini",
+                status_code=status_code,
             ) from e
 
         except errors.ServerError as e:
@@ -89,9 +96,10 @@ class GeminiClient(LLMClient):
             ) from e
 
         except Exception as e:
-
             raise ProviderError(
-                f"Unexpected Gemini error: {e}"
+                f"Gemini API error: {e}",
+                provider="gemini",
+                status_code=status_code,
             ) from e
 
         latency_ms = (

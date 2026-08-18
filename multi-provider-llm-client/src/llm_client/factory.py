@@ -20,47 +20,20 @@ from .gemini_client import GeminiClient
 from .groq_client import GroqClient
 from .ollama_client import OllamaClient
 
-
 class LLMFactory:
-
     @staticmethod
-    def create(
-        provider: str,
-        config: LLMConfig,
-    ) -> LLMClient:
-
+    def create(provider: str, config: LLMConfig,) -> LLMClient:
         provider = provider.lower().strip()
-
         if provider == "ollama":
-
-            return OllamaClient(
-                model=config.ollama_model
-            )
+            return OllamaClient(model=config.ollama_model, timeout_seconds=config.timeout_seconds,)
 
         if provider == "gemini":
-
             if not config.gemini_api_key:
-                raise ProviderError(
-                    "GEMINI_API_KEY is not configured."
-                )
-
-            return GeminiClient(
-                api_key=config.gemini_api_key,
-                model=config.gemini_model,
-            )
+                raise ProviderError("GEMINI_API_KEY is not configured.")
+            return GeminiClient(api_key=config.gemini_api_key, model=config.gemini_model, timeout_seconds=config.timeout_seconds,)
 
         if provider == "groq":
-
             if not config.groq_api_key:
-                raise ProviderError(
-                    "GROQ_API_KEY is not configured."
-                )
-
-            return GroqClient(
-                api_key=config.groq_api_key,
-                model=config.groq_model,
-            )
-
-        raise ProviderError(
-            f"Unsupported LLM provider: '{provider}'"
-        )
+                raise ProviderError("GROQ_API_KEY is not configured.")
+            return GroqClient(api_key=config.groq_api_key, model=config.groq_model, timeout_seconds=config.timeout_seconds,)
+        raise ProviderError(f"Unsupported LLM provider: '{provider}'")

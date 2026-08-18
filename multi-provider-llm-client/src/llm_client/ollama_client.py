@@ -21,8 +21,7 @@ Update: Added latency measurement to the generate method. The time taken for the
 
 import time
 
-from ollama import chat
-from ollama import ResponseError
+from ollama import Client, ResponseError
 
 from .base import LLMClient, LLMResponse
 from .errors import (
@@ -34,16 +33,15 @@ from .errors import (
 
 class OllamaClient(LLMClient):
 
-    def __init__(self, model: str):
+    def __init__(self, model: str, timeout_seconds: float):        
+        self.client = Client(host="http://localhost:11434", timeout=timeout_seconds,)
         self.model = model
 
     def generate(self, prompt: str) -> LLMResponse:
 
         start = time.perf_counter()
-
         try:
-
-            response = chat(
+            response = self.client.chat(
                 model=self.model,
                 messages=[
                     {
@@ -54,15 +52,18 @@ class OllamaClient(LLMClient):
             )
 
         except ResponseError as e:
-
             if getattr(e, "status_code", None) == 404:
-
                 raise ModelNotFoundError(
                     f"Ollama model '{self.model}' was not found."
                 ) from e
-
             raise ProviderError(
-                f"Ollama error: {e}"
+                f"Ollama error: {e}",
+                provider="ollama",
+                status_code=getattr(
+                    e,
+                    "status_code",
+                    None,
+                ),
             ) from e
 
         except Exception as e:

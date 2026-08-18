@@ -15,6 +15,7 @@ import time
 from groq import Groq
 from groq import (
     APIConnectionError,
+    APITimeoutError,
     APIStatusError,
     AuthenticationError as GroqAuthenticationError,
     NotFoundError,
@@ -32,12 +33,11 @@ from .errors import (
 
 class GroqClient(LLMClient):
 
-    def __init__(self, api_key: str, model: str):
-        self.client = Groq(api_key=api_key)
+    def __init__(self, api_key: str, model: str, timeout_seconds: float):
+        self.client = Groq(api_key=api_key, timeout=timeout_seconds)
         self.model = model
 
     def generate(self, prompt: str) -> LLMResponse:
-
         start = time.perf_counter()
 
         try:
@@ -72,12 +72,25 @@ class GroqClient(LLMClient):
 
         except APIStatusError as e:
             raise ProviderError(
-                f"Groq API error: {e}"
+                f"Groq API error: {e}",
+                provider="groq",
+                status_code=e.status_code,
             ) from e
 
         except Exception as e:
             raise ProviderError(
-                f"Unexpected Groq error: {e}"
+                f"Unexpected Groq error: {e}",
+                provider="groq",
+            ) from e
+
+        except APITimeoutError as e:
+            raise LLMConnectionError(
+                "Groq request timed out."
+            ) from e
+
+        except APIConnectionError as e:
+            raise LLMConnectionError(
+                "Unable to connect to Groq."
             ) from e
 
         latency_ms = (time.perf_counter() - start) * 1000

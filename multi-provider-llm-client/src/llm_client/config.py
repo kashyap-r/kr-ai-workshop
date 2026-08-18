@@ -7,6 +7,7 @@ import os
 from dataclasses import dataclass 
 from pathlib import Path
 from dotenv import load_dotenv
+from .retry import RetryPolicy
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(PROJECT_ROOT / ".env")
@@ -19,15 +20,44 @@ class LLMConfig:
     gemini_model: str
     groq_api_key: str | None
     groq_model: str
+    timeout_seconds: float
+    retry_policy: RetryPolicy
 
 def load_config() -> LLMConfig:
+    retry_policy = RetryPolicy(
+    max_attempts=int(
+        os.environ["LLM_MAX_ATTEMPTS"]
+    ),
+
+    initial_delay_seconds=float(
+        os.environ["LLM_INITIAL_RETRY_DELAY"]
+    ),
+
+    max_delay_seconds=float(
+        os.environ["LLM_MAX_RETRY_DELAY"]
+    ),
+
+    backoff_multiplier=float(
+        os.environ["LLM_BACKOFF_MULTIPLIER"]
+    ),
+
+    jitter=os.environ[
+        "LLM_RETRY_JITTER"
+    ].lower() == "true",
+)
     return LLMConfig(
-        provider=os.getenv("LLM_PROVIDER", "ollama"),
+        provider=os.getenv("LLM_PROVIDER"),
+
         ollama_model=os.environ["OLLAMA_MODEL"],
-        gemini_api_key=os.getenv("GEMINI_API_KEY"),
         gemini_model=os.environ["GEMINI_MODEL"],
-        groq_api_key=os.getenv("GROQ_API_KEY"),
-        groq_model=os.environ["GROQ_MODEL"]
+        groq_model=os.environ["GROQ_MODEL"],
+
+        gemini_api_key=os.environ.get("GEMINI_API_KEY"),
+        groq_api_key=os.environ.get("GROQ_API_KEY"),
+        
+        timeout_seconds=float(os.environ["LLM_TIMEOUT_SECONDS"]),
+        
+        retry_policy=retry_policy
     )
     
 

@@ -57,6 +57,7 @@ def calculate_delay(
 
 def is_retryable(error: Exception) -> bool:
 
+    # These should never be retried.
     if isinstance(
         error,
         (
@@ -66,6 +67,7 @@ def is_retryable(error: Exception) -> bool:
     ):
         return False
 
+    # These are normally transient.
     if isinstance(
         error,
         (
@@ -75,11 +77,28 @@ def is_retryable(error: Exception) -> bool:
     ):
         return True
 
-    if isinstance(
-        error,
-        ProviderError,
-    ):
-        return True
+    # Provider errors depend on HTTP status.
+    if isinstance(error, ProviderError):
+
+        status_code = error.status_code
+
+        if status_code is None:
+            return False
+
+        # Explicitly rate limited.
+        if status_code == 429:
+            return True
+
+        # Request timeout.
+        if status_code == 408:
+            return True
+
+        # Server-side failures.
+        if 500 <= status_code <= 599:
+            return True
+
+        # Other 4xx errors are normally permanent.
+        return False
 
     return False
 
