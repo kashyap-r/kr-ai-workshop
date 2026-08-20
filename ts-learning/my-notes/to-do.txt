@@ -1,0 +1,2 @@
+
+1. Incorporate logger function into any of the ts program
