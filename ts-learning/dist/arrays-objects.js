@@ -14,5 +14,16 @@ let newUsers;
 let possibleResults;
 possibleResults = [1, -1];
 possibleResults = [5, 10, 12];
+// -----------------------------------------------
+let user1 = {
+    name: 'max',
+    age: 33
+};
+console.log(user1.name);
+let user = {
+    name: "Bond",
+    age: 33
+};
+console.log(user.name || user.age);
 export {};
 //# sourceMappingURL=arrays-objects.js.map

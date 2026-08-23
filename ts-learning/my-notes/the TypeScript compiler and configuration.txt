@@ -1,0 +1,6 @@
+Compiling individual files 
+
+tsc filename.tsc
+
+
+Go to the root project directory 
