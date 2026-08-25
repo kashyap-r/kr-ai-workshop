@@ -4,6 +4,13 @@ Description: TypeScript revision - 2026
 This is a basic TypeScript file that demonstrates the usage of different data types in TypeScript.
 
 * This is a multi-line comment in TypeScript. It can span multiple lines and is often used for documentation purposes.
+
+Variable declaration in typescript 
+- can be done using let, const or var 
+Note: Best practice - avoid using var as it is legacy 
+- let name: string = 'Hello;
+- let city: string 
+- let country = 'India'
 */
 
 console.log("Hello welcome to TypeScript..!!");  
