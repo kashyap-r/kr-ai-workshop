@@ -248,6 +248,45 @@ while (num >= 1) {
 }
 console.log("The factorial of "+num + " is " + factorial);
 
+// while loop with break
+var i: number = 0;
+
+while (i < 5) {
+    if (i == 3) {
+        break;
+    }
+    console.log(i);
+    i++;
+}
 
 
+// while loop vs for loop 
+// consider the below example 
 
+for (var i=0; i<5; i++) {
+    console.log(i);
+}
+
+// can be written as 
+var i=0;
+for (;i<5;) {
+    console.log(i);
+    i++;
+}
+
+// is similar to 
+var i=0;
+while (i<5) {
+    console.log(i);
+    i++;
+}
+
+/**
+ * The do while loop 
+ */
+
+var no:number = 10;
+do {
+    console.log(no);
+    n--;
+} while (n>=0);

@@ -1,0 +1,109 @@
+Prompt Factory 
+
+In Ingestion and Indexing pipeline 
+1. Parsing & Extraction of Data 
+Text Extraction 
+Table Extraction
+OCR 
+Metadata Extraction 
+Language Detection 
+
+- What are the different techniques?
+- When to use what ?
+- What are the different python libraries ?
+- How to store the data - best way ? 
+- How to ensure table extracted from a PDF - the structure of data is retained/ preserved?
+- POCs for each of them
+- How to do this at scale like 5M, 10M, 50m documents 
+- How to store metadata extracted or what is a metadata store? Why is metadata required? how do we use it?
+
+
+2. Chunking 
+Text Splitting 
+Chunk Size Optimization 
+Overlap Management
+- What are the different techniques? 
+- When to use what?
+- Best Practices, performance considerations
+- POCs 
+
+3. Embedding Generation
+How ? 
+What models are used - industry standard - whether it is based on use-case or scale ? 
+Different techniques? 
+How to choose the right embedding model?
+POCs
+How to store Chunks ? Best medium? 
+How to access it? where is it used?
+
+4. Indexing 
+What? Why? How important is it in real-world application?
+Who does it ? 
+Best storage for indexing? Vector Database?
+How is it used ? 
+
+2. Retrieval & Generation Pipeline
+1. Query interface (UI) - Need a basic UI for USER QUERY 
+	- can I do it in python ?
+	- what do I use ? Streamlit ? 
+	- Can i do it in typescript ?
+	- What framework to use? 
+	- Which one is the best among them?
+In real-world 
+	- How to handle scale?
+	
+2. Query Understanding
+	- Preprocessing: 
+		- Does the user query needs preprocessing ?
+		- what pre-processing is needed?
+		- are there different techniques?
+		- does NLP find a place here? 
+		- How to manage storage? especially when say 10K users have same question?
+	- Intent Detection	
+		- What is intent detection ? Different techniques ?
+		- How to choose? 
+		- Performance ?
+		- Does it need LLM here? 
+		- Can we do it without LLM here ?
+		- How will the input and output look like - industry standards?
+		- POCs 
+	- Query Expression (re-writing) 
+		- need to understand why and when this is needed?
+		- best practices
+		- how to do it ?
+	- Embedding generation 
+		- Why ? How? Where is it used?
+		- Are there different techniques? Best one ?
+		- when to use what?
+		- How will the input and output look like - industry standards?
+		- POCs 
+	
+3. Retrieval (hybrid)
+	- What ? When? Why needed?
+	- Where will the input data come from?
+	- How will the input and output look like - industry standards?
+	- POCs 
+	- What are different type of search techniques? When to use what?
+	- Vector Search (Semantic Search)
+	- Keyword Search (BM25, Full text)
+	- Top-K results ( Merged and Deduped)
+	
+4. Reranking 
+	- Reranker model?
+	- Different techniques, performance,.
+	- Why ? How ? What ? 
+	
+5. Context Assembly
+	Prompt Template + 	Retrieved Context (Top K Chunks) + User Query 
+	 = Final Augmented Prompt
+	 
+	 How? What ? Why? When?
+6. Generation 
+	- LLM 
+	- Answer Generation
+	- Stream 
+		
+		
+	
+	
+
