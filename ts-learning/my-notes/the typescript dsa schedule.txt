@@ -1,0 +1,13 @@
+Days	Pattern	Count	Key problems
+27–28 Aug	Arrays & Hashing	8	Contains Duplicate, Valid Anagram, Two Sum, Group Anagrams, Top K Frequent, Product Except Self, Longest Consecutive Sequence, Valid Sudoku
+29–30 Aug	Two Pointers + Sliding Window	10	Valid Palindrome, 3Sum, Container With Most Water, Trapping Rain Water, Best Time to Buy/Sell, Longest Substring Without Repeating, Longest Repeating Char Replacement, Min Window Substring, Permutation in String, Sliding Window Maximum
+31 Aug–1 Sep	Stack + Binary Search	10	Valid Parentheses, Min Stack, Eval RPN, Daily Temperatures, Car Fleet, Largest Rectangle in Histogram, Binary Search, Search 2D Matrix, Koko Eating Bananas, Search Rotated Sorted Array, Find Min in Rotated Array
+2–3 Sep	Linked List	8	Reverse LL, Merge Two Sorted, Reorder List, Remove Nth From End, Copy List Random Pointer, Add Two Numbers, Linked List Cycle, Merge K Sorted Lists, LRU Cache
+4–5 Sep	Trees	12	Invert Tree, Max Depth, Diameter, Balanced, Same Tree, Subtree, LCA of BST, Level Order, Right Side View, Validate BST, Kth Smallest in BST, Construct from Preorder/Inorder, Serialize/Deserialize
+6 Sep	REVIEW (half day)	—	Re-solve every problem you failed. Re-type all templates.
+7–8 Sep	Heap + Backtracking	10	Kth Largest in Stream, Last Stone Weight, K Closest Points, Task Scheduler, Subsets, Combination Sum, Permutations, Subsets II, Word Search, Palindrome Partitioning
+9–11 Sep	Graphs + Tries	14	Number of Islands, Clone Graph, Max Area of Island, Pacific Atlantic, Surrounded Regions, Rotting Oranges, Course Schedule I & II, Redundant Connection, Number of Connected Components, Word Ladder, Implement Trie, Design Add/Search Words, Word Search II
+12–14 Sep	Dynamic Programming	13	Climbing Stairs, House Robber I & II, Longest Palindromic Substring, Coin Change, Longest Increasing Subsequence, Word Break, Combination Sum IV, Unique Paths, Longest Common Subsequence, 0/1 Knapsack, Edit Distance, Max Product Subarray
+13 Sep	REVIEW (half day)	—	Overlaps with DP — go lighter on new problems, heavier on re-solves.
+15–16 Sep	Intervals + Greedy + misc	8	Insert Interval, Merge Intervals, Non-overlapping Intervals, Meeting Rooms I & II, Max Subarray, Jump Game, Gas Station
+17–19 Sep	Timed mocks only	—	See Part 5. No new problems.
