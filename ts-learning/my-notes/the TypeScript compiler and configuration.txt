@@ -19,3 +19,14 @@ Go to the root project directory
   },
   "include": ["src/**/*"]
 }
+
+TO compile the all the files from the source / project root directory  
+$: npx tsc 
+
+To Run: 
+node /dist/<filename.js>
+
+To run the file directly 
+npm start dist/dsa/ds/1.arrays.js
+
+

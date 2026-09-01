@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "run-file": "tsx",
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "node dist/hello.js"
+    "start": "tsc && node"
   },
   "keywords": [],
   "author": "",
