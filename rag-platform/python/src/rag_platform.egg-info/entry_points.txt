@@ -1,0 +1,2 @@
+[console_scripts]
+rag-platform = rag_platform.main:main

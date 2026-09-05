@@ -7,4 +7,6 @@ Any resemblance to enterprise architectures reflects publicly known design patte
 
 Project 1: Multi-provider LLM Client
 
-Project 2: Enterprise-llmops-on-AWS
+Project 2: Enterprise RAG Platform
+
+Project 3: Enterprise-llmops-on-AWS
