@@ -6,6 +6,7 @@ Author: Kashyap Rajpurohit
 License: MIT
 Requires-Python: <3.15,>=3.14
 Description-Content-Type: text/markdown
+Requires-Dist: pypdf>=6.17.0
 Provides-Extra: dev
 Requires-Dist: pytest<9.0,>=8.0; extra == "dev"
 Requires-Dist: pytest-cov<7.0,>=5.0; extra == "dev"

@@ -12,7 +12,9 @@ license = { text = "MIT" }
 authors = [
     { name = "Kashyap Rajpurohit" }
 ]
-dependencies = []
+dependencies = [
+    "pypdf>=6.17.0",
+]
 
 [project.optional-dependencies]
 dev = [
