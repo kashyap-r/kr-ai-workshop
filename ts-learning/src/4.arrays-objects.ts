@@ -25,12 +25,12 @@ possibleResults = [1, -1]
 possibleResults = [5, 10, 12]
 
 // -----------------------------------------------
-
+console.log("-----------------------------------------------");
+console.log("What is this.. ?");
 let user1 = {
     name: 'max',
     age: 33
 }
-
 
 let user: {
     name: string;
@@ -39,8 +39,8 @@ let user: {
     name: "Bond",
     age: 33
 };
-
-console.log(user.name || user.age)
+console.log(typeof(user.name));
+console.log(user.name || user.age);
 
 // Get a bit creative and ...
 let userRec: {

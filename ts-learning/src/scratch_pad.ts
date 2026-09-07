@@ -1,24 +1,45 @@
-// Variable declarations 
+/*
+### Variables in TypeScript 
 
+* The can be declared using let, const, or var with optional type annotations for better type safety. 
+
+Note: Using var is generally avoided for variable declaration because let and const provide safer block-level scoping.
+*/
+
+//1. Declare Type and Value in a single statement 
+
+    let username: string = 'Jam';
+    const userage: number = 25;
+
+// 2. Declare Type without a value 
+
+    let gender: string;
+
+// 3. Declare value without a type 
+
+    let country = 'India';
+
+/* Variable declarations 
 // using let: mutable i.e. value can be changed after declaration 
 // let provides block-level scoping 
+*/
+
 let count = 5;
 if (count > 0) {
   let message = "Count is positive";
   console.log(message); 
 }
-// console.log(message);  // Error: message is not accessible here
+// The below statement will error out, the variable 'message' is not accessible here
+// console.log(message);  
+
+/* 
+Using var: var is function scoped.  It is generally avoided in modern typescript because let 
+and const provide for safer block-level scoping
+*/
 
 
 // using const: Immutable
 
-// Types of variable declarations
-// declare type and value in a single statement 
-let name: string = "Kashyap";
-// declare type without value 
-let age: number;
-// declare value without type 
-let city = "Bengaluru"
 
 // Type Annotations
 let userName: string = "Jane";  
@@ -74,6 +95,5 @@ Object, array, tuple, enum function class interface
 
 Advanced Types 
 union types, interscriotion types, literal types mapped types/.
-
 
 */

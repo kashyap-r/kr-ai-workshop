@@ -12,5 +12,6 @@ console.log(`Hello, ${username}!`);
 let userAge: number = 25;
 console.log(`User age is: ${userAge}`);
 
+// printing variable values
 let isLoggedIn: boolean = true;
 console.log(`Is user logged in? ${isLoggedIn}`);

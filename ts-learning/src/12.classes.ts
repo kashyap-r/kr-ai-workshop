@@ -5,6 +5,7 @@
 //     name: string;
 //     age: number;
 
+
 //     constructor(name: string, age: number){
 //         this.name = name;
 //         this.age = age
@@ -75,6 +76,41 @@ console.log(max2.hobbies);
 max2.hobbies.push('Cooking'); // This is allowed because we are modifying the contents of the array, not reassigning the property itself.
 console.log(max2.hobbies);
 
+console.log("-------------------=========================---------------------");
+// different ways of initializing the class members
+class Point {
+    x: number=0;
+    y: number=0;
+}
 
+const pt = new Point();
+
+console.log(`x=${pt.x}, y=${pt.y}`);
+pt.x = 2;
+pt.y = 3;
+console.log(`x=${pt.x}, y=${pt.y}`);
+
+// OR 
+// using a constrcutor
+class newPoint {
+    x: number;
+    y: number;
+
+    constructor() {
+        this.x=0;
+        this.y=0;
+
+    }
+}
+
+const pt1 = new newPoint();
+console.log(`x=${pt1.x}, y=${pt1.y}`);
+pt1.x = 12;
+pt1.y = 13;
+console.log(`x=${pt1.x}, y=${pt1.y}`);
+console.log("-------------------=========================---------------------");
+/***
+ * readonly - fields may be 
+ */
 
 
