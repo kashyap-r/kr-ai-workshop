@@ -1,0 +1,12 @@
+# Germany Holiday Calendar 2026
+
+All dates below are fictional demo data.
+
+- 2026-01-01 — New Year's Day
+- 2026-04-03 — Good Friday
+- 2026-04-06 — Easter Monday
+- 2026-05-01 — Labour Day
+- 2026-05-14 — Ascension Day
+- 2026-10-03 — German Unity Day
+- 2026-12-25 — Christmas Day
+- 2026-12-26 — Boxing Day

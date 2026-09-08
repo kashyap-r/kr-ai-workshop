@@ -48,7 +48,7 @@ class FilesystemConnector:
 
         documents: list[SourceDocument] = []
 
-        for path in sorted(self.root.iterdir()):
+        for path in sorted(self.root.rglob("*")):
             if not path.is_file():
                 continue
 
@@ -58,11 +58,9 @@ class FilesystemConnector:
                 continue
 
             content = path.read_bytes()
-
-            document_id = derive_document_id(
-                self.source.id,
-                path.name,
-            )
+            relative_path = str(path.relative_to(self.root))
+            
+            document_id = derive_document_id(self.source.id, str(relative_path),)
 
             documents.append(
                 SourceDocument(
@@ -73,6 +71,10 @@ class FilesystemConnector:
                     content=content,
                     checksum=calculate_checksum(content),
                     ingested_at=datetime.now(UTC),
+                    metadata={
+                        "path": relative_path,
+                        "filename": path.name,
+                    },
                 )
             )
 

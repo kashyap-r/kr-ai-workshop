@@ -15,6 +15,6 @@ class MarkdownParser:
             parser_version=self.VERSION,
             format=document.format,
             text=text,
-            metadata={},
+            metadata=dict(document.metadata),
             parsed_at=datetime.now(UTC),
         )

@@ -1,6 +1,6 @@
 # M1 — Source Abstraction
 filename: file_source.py
-
+NOTE: This module is redundant and is NOT IN USE
 ## Context
 
 The RAG platform needs to ingest documents from different source types.

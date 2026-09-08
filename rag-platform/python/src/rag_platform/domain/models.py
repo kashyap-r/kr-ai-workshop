@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from enum import StrEnum
 
@@ -37,6 +37,7 @@ class SourceDocument:
     checksum: str
     ingested_at: datetime
     source_created_at: datetime | None = None
+    metadata: Mapping[str, str] = field(default_factory=dict)
 
 @dataclass(frozen=True, slots=True)
 class ParsedDocument:

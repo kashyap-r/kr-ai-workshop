@@ -21,6 +21,7 @@ class PDFParser:
                 pages.append(text)
         extracted_text = "\n\n".join(pages)
         metadata = {
+            **document.metadata,
             "page_count": str(len(reader.pages)),
         }
 

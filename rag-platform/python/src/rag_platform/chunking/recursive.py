@@ -39,13 +39,14 @@ class RecursiveChunker:
 
             results.append(
                 DocumentChunk(
-                    chunk_id=derive_chunk_id(
-                        document.id,
-                        1,
-                        self.VERSION,
-                        sequence_number,
-                        chunk_text,
-                    ),
+                    chunk_id=
+                        derive_chunk_id( 
+                            document.id,
+                            1,
+                            self.VERSION,
+                            sequence_number,
+                            chunk_text,
+                        ),
                     document_id=document.id,
                     document_version=1,
                     chunking_version=self.VERSION,

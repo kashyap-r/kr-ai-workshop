@@ -1,0 +1,34 @@
+{
+  "fictional": true,
+  "employees_total": 25,
+  "employees_by_country": {
+    "Sweden": 10,
+    "Germany": 5,
+    "India": 10
+  },
+  "rules": [
+    "Base-location policy normally applies.",
+    "Germany/India employees temporarily working abroad use host-country policy.",
+    "Sweden-based employees remain under Swedish HQ policy globally.",
+    "Permanent transfer changes base location and normal jurisdiction.",
+    "Contract-specific terms and approval requirements may override standard entitlements.",
+    "PIP creates review requirements for extended leave but does not remove leave rights."
+  ],
+  "country_counts": {
+    "sweden": {
+      "employees": 10,
+      "markdown_txt_files": 25,
+      "contracts_pdf": 4
+    },
+    "germany": {
+      "employees": 5,
+      "markdown_txt_files": 14,
+      "contracts_pdf": 4
+    },
+    "india": {
+      "employees": 10,
+      "markdown_txt_files": 26,
+      "contracts_pdf": 7
+    }
+  }
+}
