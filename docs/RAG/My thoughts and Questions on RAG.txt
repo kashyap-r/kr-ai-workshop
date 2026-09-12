@@ -32,6 +32,8 @@ How ?
 What models are used - industry standard - whether it is based on use-case or scale ? 
 Different techniques? 
 How to choose the right embedding model?
+Are there different types of embedding models ? 
+WHat about pricing and cost? How to budget for them ? 
 POCs
 How to store Chunks ? Best medium? 
 How to access it? where is it used?

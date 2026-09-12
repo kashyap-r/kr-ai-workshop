@@ -61,6 +61,14 @@ class DocumentChunk:
     start_offset: int
     end_offset: int
 
+@dataclass(frozen=True, slots=True)
+class Chunk:
+    id: str
+    document_id: str
+    text: str
+    sequence: int 
+    metadata: Mapping[str, Any]
+    
 
 """
 This class becomes important when we implement retrieval and ranking. 

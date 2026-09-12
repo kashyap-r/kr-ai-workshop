@@ -83,3 +83,9 @@ no_implicit_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
 warn_return_any = true
+
+[dependency-groups]
+dev = [
+    "matplotlib>=3.11.2",
+    "sentence-transformers>=6.0.1",
+]
