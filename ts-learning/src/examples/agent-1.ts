@@ -84,6 +84,7 @@ console.log ("\n------------------====== =====---------------------");
  * The Setter: Prevents invalid configurations (like assigning an empty 
  * string to the agent's name or an unsupported LLM model).
  *  */
+
 console.log("Same Agent implemented using getters and setters ")
 class Agent {
     private _executionCount = 0;
@@ -96,8 +97,8 @@ class Agent {
         model: string
     ){
         // Using the setters inside the constructor ensures initial values are also validated!
-        this.name = name;
-        this.model = model;
+        this._name = name;
+        this._model = model;
     }
 
     // 1. GETTER: Exposes executionCount as read-only. 
@@ -111,12 +112,66 @@ class Agent {
         return this._name
     }
 
-    public get model(newModel: string) {
+    public set name(newName: string){
+        if (!newName.trim()){
+            throw new Error("Agent name cannot be empty.");
+        }
+        this._name = newName;
+    }
+
+    // 3. GETTER & SETTER for 'model' (with custom logic)
+    public get model(): string {
+        return this._model;
+    }
+
+    public set model(newModel: string) {
         if (!newModel.startsWith("gpt-") && !newModel.startsWith("deepseek-")) {
             throw new Error(`Unsupported model tier: $newModel`);
         }
         this._model = newModel;
     }
 
-
+    public run(task: string): string {
+        this._executionCount++;
+        return `${this.name} (${this.model}): ${task}`;
+    }
 }
+
+// Testing the implementation 
+
+const newAgent = new Agent("XC90-1", "Planner", 'gpt-5.4-nano');
+
+// Notice how we access .executionCount without parenthesis ()
+console.log(`Initial count: ${newAgent.executionCount}`); // Outputs: 0
+
+newAgent.run("Check parental leave eligibility");
+
+// The getter intercepts this seamlessly
+console.log(`New count: ${newAgent.executionCount}`); // Outputs: 1
+
+// Attempting to overwrite the getter will fail compilation:
+// agent.executionCount = 100; // ❌ Error: Cannot assign to 'executionCount' because it is a read-only property.
+
+// Testing the Setters
+newAgent.name = "Strategist"; // ✅ Works flawlessly
+console.log(`Updated Name: ${newAgent.name}`); 
+
+try {
+    newAgent.model = "llama-3-basic"; // ❌ Throws error: Unsupported model tier
+} catch (error: any) {
+    console.error(`Validation caught: ${error.message}`);
+}
+
+/**
+ * The Underscore Convention (_propertyName): When creating a getter/
+ * setter, you must change the name of the underlying private variable 
+ * (usually by adding an underscore). 
+ * 
+ * If you don't, JavaScript gets confused and enters an infinite 
+ * loop.
+ * 
+ * Property-like Syntax: Outside the class, you read and write
+ * data normally using = and no parentheses (agent.name = "New Name"),
+ * but behind the scenes, your custom validation logic executes.
+ * 
+ */
