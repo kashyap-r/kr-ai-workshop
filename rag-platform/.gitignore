@@ -2,3 +2,5 @@
 .env.*
 data/processed/parsed/ZCompanyLLC/*
 data/processed/chunks/ZCompanyLLC/*
+data/processed/vector_store_expt/*
+data/processed/vector_store/*

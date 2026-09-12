@@ -1,0 +1,5 @@
+{"timestamp": "2026-09-12T22:56:11+0530", "level": "INFO", "logger": "__main__", "message": "embedding_started", "taskName": null, "chunks_root": "data/processed/chunks/ZCompanyLLC", "embedding_model": "BAAI/bge-small-en-v1.5"}
+{"timestamp": "2026-09-12T22:56:11+0530", "level": "INFO", "logger": "__main__", "message": "chunks_loaded", "taskName": null, "chunks": 88}
+{"timestamp": "2026-09-12T22:56:12+0530", "level": "INFO", "logger": "__main__", "message": "embedding_completed", "taskName": null, "chunks": 88, "embedding_dimension": 384, "duration_seconds": 0.176, "chunks_per_second": 500.14}
+{"timestamp": "2026-09-12T22:56:12+0530", "level": "INFO", "logger": "__main__", "message": "vector_indexing_completed", "taskName": null, "chunks": 88, "duration_seconds": 0.0214, "vector_store": "chroma", "collection": "zcompany_hr_chunks"}
+{"timestamp": "2026-09-12T22:56:12+0530", "level": "INFO", "logger": "__main__", "message": "embedding_and_indexing_completed", "taskName": null, "chunks": 88, "embedding_model": "BAAI/bge-small-en-v1.5", "vector_store": "chroma"}

@@ -1,3 +1,4 @@
+chromadb>=1.5.9
 pypdf>=6.17.0
 
 [dev]

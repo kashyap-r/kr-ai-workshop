@@ -13,6 +13,7 @@ authors = [
     { name = "Kashyap Rajpurohit" }
 ]
 dependencies = [
+    "chromadb>=1.5.9",
     "pypdf>=6.17.0",
 ]
 
