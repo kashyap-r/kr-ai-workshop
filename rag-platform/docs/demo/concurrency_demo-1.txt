@@ -1,0 +1,42 @@
+
+ ---- SEQUNTIAL ----
+Starting file1.pdf
+Finished file1.pdf
+Starting file2.pdf
+Finished file2.pdf
+Starting file3.pdf
+Finished file3.pdf
+Starting file4.pdf
+Finished file4.pdf
+Starting file5.pdf
+Finished file5.pdf
+
+ Sequential time: 10.02 seconds
+
+--- Multithreading ---
+Starting file1.pdf
+Starting file2.pdf
+Starting file3.pdf
+Starting file4.pdf
+Starting file5.pdf
+Finished file2.pdf
+Finished file1.pdf
+Finished file3.pdf
+Finished file4.pdf
+Finished file5.pdf
+
+ Threading time: 2.01 seconds
+
+ --- Asyncio ---
+Starting file1.pdf
+Starting file2.pdf
+Starting file3.pdf
+Starting file4.pdf
+Starting file5.pdf
+Finished file1.pdf
+Finished file2.pdf
+Finished file3.pdf
+Finished file4.pdf
+Finished file5.pdf
+
+ Asyncio time: 2.00seconds
