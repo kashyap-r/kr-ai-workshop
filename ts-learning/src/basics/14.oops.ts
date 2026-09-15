@@ -180,3 +180,68 @@ class Child extends Parent {
 const obj = new Child();
 obj.greet();
 
+console.log("------------ Abstract classes another example --------------");
+abstract class myAnimal {
+    constructor(public name: string) {}
+
+    // concrete method 
+    eat(): void {
+        console.log(`${this.name} is eating`);
+    }
+
+    // abstract method 
+    abstract makeSound(): void;
+}
+
+class Dog extends myAnimal {
+  makeSound(): void {
+    console.log("Woof!");
+  }
+}
+
+class myCat extends myAnimal {
+  makeSound(): void {
+    console.log("Meow!");
+  }
+}
+
+const dog = new Dog("Bruno");
+
+dog.eat();
+dog.makeSound();
+
+console.log("------------ Abstract classes, Yet another example --------------");
+abstract class PaymentProcessor{
+    constructor(protected amount: number){}
+
+    validateAmount(): boolean {
+        return this.amount > 0;
+    }
+
+    abstract pay(): void;
+}
+
+// Now indidividual payment processors must implement pay()
+class CreditCardPayment extends PaymentProcessor {
+  pay(): void {
+    if (this.validateAmount()) {
+      console.log(`Paying ₹${this.amount} using Credit Card`);
+    }
+  }
+}
+
+class UPIPayment extends PaymentProcessor {
+  pay(): void {
+    if (this.validateAmount()) {
+      console.log(`Paying ₹${this.amount} using UPI`);
+    }
+  }
+}
+
+const creditCard = new CreditCardPayment(5000);
+creditCard.pay();
+
+const upi = new UPIPayment(2000);
+upi.pay();
+
+

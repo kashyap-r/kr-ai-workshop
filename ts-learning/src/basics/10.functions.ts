@@ -91,3 +91,20 @@ console.log(res(12,2));
  * 
  * 
  */
+
+/** 
+ * Function Overloading
+ */
+
+function displayInfo(info: string): void;
+function displayInfo(info: number): void;
+function displayInfo(info: string | number): void {
+    if (typeof info === "string") {
+        console.log(`Name: ${info}`);
+    } else {
+        console.log(`Age: ${info}`);
+    }
+}
+
+console.log(displayInfo("JamesBond"));
+console.log(displayInfo(45));
