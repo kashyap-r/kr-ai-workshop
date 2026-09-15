@@ -1,6 +1,6 @@
-
 from collections.abc import Sequence
 from pathlib import Path
+from typing import Any, cast
 
 import chromadb
 
@@ -49,6 +49,19 @@ class ChromaVectorStore:
             ],
         )
 
+    def delete(self, ids: Sequence[str]) -> None:
+        """Delete the supplied chunk IDs from the collection."""
+        if not ids:
+            return
+        self._collection.delete(ids=[str(chunk_id) for chunk_id in ids])
+
+    def delete_all(self) -> None:
+        """Delete every chunk currently stored in the collection."""
+        result = self._collection.get()
+        ids = result.get("ids", [])
+        if ids:
+            self._collection.delete(ids=[str(chunk_id) for chunk_id in ids])
+
     def query(
         self,
         embedding: Sequence[float],
@@ -64,9 +77,20 @@ class ChromaVectorStore:
         )
 
         ids = results["ids"][0]
-        documents = results["documents"][0]
-        distances = results["distances"][0]
-        metadatas = results["metadatas"][0]
+        documents_result = results["documents"]
+        if documents_result is None:
+            raise RuntimeError("Chroma query did not return documents.")
+        documents = documents_result[0]
+        if documents is None:
+            raise RuntimeError("Chroma query did not return documents.")
+        distances_result = results["distances"]
+        if distances_result is None:
+            raise RuntimeError("Chroma query did not return distances.")
+        distances = distances_result[0]
+        metadatas_result = results["metadatas"]
+        if metadatas_result is None:
+            raise RuntimeError("Chroma query did not return metadata.")
+        metadatas = metadatas_result[0]
 
         retrieval_results: list[RetrievalResult] = []
 
@@ -74,14 +98,21 @@ class ChromaVectorStore:
             zip(ids, documents, distances, metadatas),
             start=1,
         ):
+            metadata_dict = cast(dict[str, Any], metadata)
+
+            document_id = cast(str, metadata_dict["document_id"])
+            document_version = int(metadata_dict["document_version"])
+            chunking_version = cast(str, metadata_dict["chunking_version"])
+            sequence_number = int(metadata_dict["sequence_number"])
+
             chunk = DocumentChunk(
-                chunk_id=chunk_id,
-                document_id=metadata["document_id"],
-                document_version=int(metadata["document_version"]),
-                chunking_version=metadata["chunking_version"],
+                chunk_id=cast(ChunkID, chunk_id),
+                document_id=metadata_dict["document_id"],
+                document_version=document_version,
+                chunking_version=chunking_version,
                 text=text,
                 metadata={},
-                sequence_number=int(metadata["sequence_number"]),
+                sequence_number=sequence_number,
                 start_offset=0,
                 end_offset=len(text),
             )

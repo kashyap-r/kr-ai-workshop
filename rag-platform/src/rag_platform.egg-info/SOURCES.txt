@@ -1,3 +1,4 @@
+README.md
 pyproject.toml
 src/rag_platform/__init__.py
 src/rag_platform/demo.py
@@ -18,6 +19,9 @@ src/rag_platform/domain/models.py
 src/rag_platform/domain/types.py
 src/rag_platform/embeddings/__init__.py
 src/rag_platform/embeddings/base.py
+src/rag_platform/embeddings/sentence_transformer.py
+src/rag_platform/indexing/__init__.py
+src/rag_platform/indexing/indexer.py
 src/rag_platform/logging/__init__.py
 src/rag_platform/logging/config.py
 src/rag_platform/parsers/__init__.py
@@ -26,5 +30,10 @@ src/rag_platform/parsers/pdf.py
 src/rag_platform/parsers/text.py
 src/rag_platform/sources/__init__.py
 src/rag_platform/sources/file_source.py
+src/rag_platform/vector_store/__init__.py
+src/rag_platform/vector_store/base.py
+src/rag_platform/vector_store/chroma.py
 tests/test_bootstrap.py
 tests/test_embeddings.py
+tests/test_indexer.py
+tests/test_vector_store.py

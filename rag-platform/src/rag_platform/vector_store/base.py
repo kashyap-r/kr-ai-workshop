@@ -3,7 +3,6 @@ from typing import Protocol
 
 from rag_platform.domain.models import DocumentChunk, RetrievalResult
 
-
 class VectorStore(Protocol):
     """Contract for vector storage and similarity search."""
 
@@ -13,6 +12,14 @@ class VectorStore(Protocol):
         embeddings: Sequence[Sequence[float]],
     ) -> None:
         """Store or update chunks and their embeddings."""
+        ...
+
+    def delete(self, ids: Sequence[str]) -> None:
+        """Delete chunks by their vector-store IDs."""
+        ...
+
+    def delete_all(self) -> None:
+        """Delete every vector from the current collection."""
         ...
 
     def query(
