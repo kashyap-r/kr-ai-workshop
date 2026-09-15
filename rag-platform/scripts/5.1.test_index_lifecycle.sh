@@ -11,7 +11,7 @@ mkdir -p "$BACKUP"
 
 echo
 echo "========================================"
-echo "M5.3 LIFECYCLE VALIDATION"
+echo "M5.3 Index LIFECYCLE VALIDATION"
 echo "========================================"
 
 # --------------------------------------------------
@@ -40,7 +40,7 @@ echo "========================================"
 echo "1. CHANGED DOCUMENT"
 echo "========================================"
 
-python - "$FILE1" <<'PY'
+uv run python - "$FILE1" <<'PY'
 import json
 import sys
 
@@ -56,7 +56,7 @@ with open(path, "w", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 PY
 
-uv run python scripts/5.index_documents.py
+uv run python scripts/5.0.index_documents.py
 
 echo
 echo "Expected: 1 changed, remaining documents unchanged."
@@ -70,7 +70,7 @@ echo "Restoring changed document..."
 
 cp "$BACKUP/file1.jsonl" "$FILE1"
 
-uv run python scripts/5.index_documents.py
+uv run python scripts/5.0.index_documents.py
 
 echo
 echo "Restoration complete."
@@ -88,7 +88,7 @@ mkdir -p "$BACKUP/deleted"
 
 mv "$FILE2" "$BACKUP/deleted/"
 
-uv run python scripts/5.index_documents.py
+uv run python scripts/5.0.index_documents.py
 
 echo
 echo "Expected: 1 deleted, remaining documents unchanged."
@@ -102,7 +102,7 @@ echo "Restoring deleted document..."
 
 mv "$BACKUP/deleted/$(basename "$FILE2")" "$FILE2"
 
-uv run python scripts/5.index_documents.py
+uv run python scripts/5.0.index_documents.py
 
 echo
 echo "Deletion restoration complete."
@@ -116,7 +116,7 @@ echo "========================================"
 echo "3. FULL REBUILD"
 echo "========================================"
 
-uv run python scripts/5.index_documents.py --rebuild
+uv run python scripts/5.0.index_documents.py --rebuild
 
 echo
 echo "Expected: full corpus indexed."
