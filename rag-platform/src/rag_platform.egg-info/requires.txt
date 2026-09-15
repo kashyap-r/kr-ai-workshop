@@ -1,8 +1,11 @@
 chromadb>=1.5.9
 pypdf>=6.17.0
-
-[dev]
+sentence-transformers>=6.0.1
+fastapi<1.0,>=0.115
+uvicorn[standard]<1.0,>=0.34
 pytest<9.0,>=8.0
 pytest-cov<7.0,>=5.0
 ruff<1.0,>=0.8
 mypy<2.0,>=1.13
+httpx<1.0,>=0.27
+matplotlib>=3.11.2

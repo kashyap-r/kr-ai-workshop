@@ -8,11 +8,15 @@ Requires-Python: <3.15,>=3.14
 Description-Content-Type: text/markdown
 Requires-Dist: chromadb>=1.5.9
 Requires-Dist: pypdf>=6.17.0
-Provides-Extra: dev
-Requires-Dist: pytest<9.0,>=8.0; extra == "dev"
-Requires-Dist: pytest-cov<7.0,>=5.0; extra == "dev"
-Requires-Dist: ruff<1.0,>=0.8; extra == "dev"
-Requires-Dist: mypy<2.0,>=1.13; extra == "dev"
+Requires-Dist: sentence-transformers>=6.0.1
+Requires-Dist: fastapi<1.0,>=0.115
+Requires-Dist: uvicorn[standard]<1.0,>=0.34
+Requires-Dist: pytest<9.0,>=8.0
+Requires-Dist: pytest-cov<7.0,>=5.0
+Requires-Dist: ruff<1.0,>=0.8
+Requires-Dist: mypy<2.0,>=1.13
+Requires-Dist: httpx<1.0,>=0.27
+Requires-Dist: matplotlib>=3.11.2
 
 Kashyap's Enterprise RAG Protoype Project — Master To-Do
 

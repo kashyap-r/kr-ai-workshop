@@ -1,0 +1,7 @@
+{"timestamp": "2026-09-15T23:59:40+0530", "level": "INFO", "logger": "rag_platform.api", "message": "request_started", "taskName": "Task-3", "request_id": "test-health-001", "method": "GET", "path": "/health"}
+{"timestamp": "2026-09-15T23:59:40+0530", "level": "INFO", "logger": "rag_platform.api", "message": "health_check", "taskName": null, "request_id": "test-health-001"}
+{"timestamp": "2026-09-15T23:59:40+0530", "level": "INFO", "logger": "rag_platform.api", "message": "request_completed", "taskName": "Task-3", "request_id": "test-health-001", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1.74}
+{"timestamp": "2026-09-15T23:59:49+0530", "level": "INFO", "logger": "rag_platform.api", "message": "request_started", "taskName": "Task-5", "request_id": "test-query-001", "method": "POST", "path": "/query"}
+{"timestamp": "2026-09-15T23:59:49+0530", "level": "INFO", "logger": "rag_platform.api", "message": "query_started", "taskName": null, "request_id": "test-query-001", "top_k": 5, "query_length": 49}
+{"timestamp": "2026-09-15T23:59:49+0530", "level": "INFO", "logger": "rag_platform.api", "message": "query_completed", "taskName": null, "request_id": "test-query-001", "top_k": 5, "result_count": 0, "latency_ms": 205.93}
+{"timestamp": "2026-09-15T23:59:49+0530", "level": "INFO", "logger": "rag_platform.api", "message": "request_completed", "taskName": "Task-5", "request_id": "test-query-001", "method": "POST", "path": "/query", "status_code": 200, "latency_ms": 207.79}

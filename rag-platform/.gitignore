@@ -6,3 +6,6 @@ data/processed/vector_store_expt/*
 data/processed/vector_store/*
 .venv
 .vscode
+src/rag_platform.egg-info
+.pytest_cache
+.ruff_cache
