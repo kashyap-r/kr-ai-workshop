@@ -3,6 +3,7 @@
 from rag_platform.domain.identity import derive_chunk_id
 from rag_platform.domain.models import DocumentChunk, ParsedDocument
 
+
 class RecursiveChunker:
     """Split parsed documents into deterministic overlapping chunks"""
     VERSION = "recursive-v1"
@@ -19,9 +20,9 @@ class RecursiveChunker:
         self.chunk_overlap = chunk_overlap
 
     def chunk(self, document: ParsedDocument) -> list[DocumentChunk]:
-        text = document.text 
+        text = document.text
 
-        if not text: 
+        if not text:
             return []
 
         chunks = self._split(text)
@@ -40,7 +41,7 @@ class RecursiveChunker:
             results.append(
                 DocumentChunk(
                     chunk_id=
-                        derive_chunk_id( 
+                        derive_chunk_id(
                             document.id,
                             1,
                             self.VERSION,
@@ -82,4 +83,4 @@ class RecursiveChunker:
 
             start = end - self.chunk_overlap
 
-        return chunks 
+        return chunks

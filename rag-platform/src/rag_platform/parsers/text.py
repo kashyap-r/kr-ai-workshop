@@ -1,7 +1,9 @@
 """Plain text document parser."""
 
 from datetime import UTC, datetime
+
 from rag_platform.domain.models import ParsedDocument, SourceDocument
+
 
 class TextParser:
     """Parse UTF-8 plain text documents."""

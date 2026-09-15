@@ -66,9 +66,9 @@ class Chunk:
     id: str
     document_id: str
     text: str
-    sequence: int 
+    sequence: int
     metadata: Mapping[str, Any]
-    
+
 
 """
 This class becomes important when we implement retrieval and ranking. 
@@ -84,5 +84,5 @@ reranking
 class RetrievalResult:
     chunk: DocumentChunk
     score: float
-    rank: int 
+    rank: int
 

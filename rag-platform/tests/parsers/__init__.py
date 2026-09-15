@@ -1,6 +1,6 @@
 """Document parsers."""
 
-# Can initialize this way.. but not needed! instead your the "from .. import.." 
+# Can initialize this way.. but not needed! instead your the "from .. import.."
 # effectively to impart the correct package
 
 # from rag_platform.parsers.markdown import MarkdownParser

@@ -1,8 +1,8 @@
-from rag_platform.embeddings.base import EmbeddingModel
-
 from rag_platform.embeddings import (
     SentenceTransformerEmbeddingModel,
 )
+from rag_platform.embeddings.base import EmbeddingModel
+
 
 class FakeEmbeddingModel:
     def embed(self, texts: list[str]) -> list[list[float]]:

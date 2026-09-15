@@ -1,10 +1,12 @@
+from datetime import UTC, datetime
 from io import BytesIO
-from pypdf import PdfWriter
-from datetime import datetime, UTC 
 
-from rag_platform.domain.models import ParsedDocument, SourceDocument, DocumentFormat
+from pypdf import PdfWriter
+
+from rag_platform.domain.models import DocumentFormat, SourceDocument
 from rag_platform.domain.types import DocumentID, SourceID
 from rag_platform.parsers.pdf import PDFParser
+
 
 def create_pdf() -> bytes:
     writer = PdfWriter()

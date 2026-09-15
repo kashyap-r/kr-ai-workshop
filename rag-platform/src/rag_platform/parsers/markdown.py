@@ -1,5 +1,6 @@
 """Markdown document parser."""
 from datetime import UTC, datetime
+
 from rag_platform.domain.models import ParsedDocument, SourceDocument
 
 

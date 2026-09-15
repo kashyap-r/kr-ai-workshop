@@ -1,5 +1,4 @@
 import json
-import logging
 from pathlib import Path
 
 from rag_platform.chunking.recursive import RecursiveChunker

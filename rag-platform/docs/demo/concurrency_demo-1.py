@@ -1,6 +1,6 @@
+import asyncio
+import threading
 import time
-import threading 
-import asyncio 
 
 FILES = [
     "file1.pdf",
@@ -10,7 +10,7 @@ FILES = [
     "file5.pdf",
 ]
 
-## 1. Sequential Version 
+## 1. Sequential Version
 def download_sequential(file_name):
     print (f"Starting {file_name}")
     # simulate waiting for network
@@ -18,7 +18,7 @@ def download_sequential(file_name):
     print (f"Finished {file_name}")
 
 def run_sequential():
-    print (f"\n ---- SEQUNTIAL ----")
+    print ("\n ---- SEQUNTIAL ----")
     start = time.perf_counter()
     for file in FILES:
         download_sequential(file)
@@ -32,7 +32,7 @@ def download_thread(file_name):
     print(f"Finished {file_name}")
 
 def run_threading():
-    print (f"\n--- Multithreading ---")
+    print ("\n--- Multithreading ---")
     start = time.perf_counter()
     threads = []
     for file in FILES:
@@ -50,20 +50,20 @@ def run_threading():
     end = time.perf_counter()
     print(f"\n Threading time: {end - start:.2f} seconds")
 
-## Asyncio version 
+## Asyncio version
 async def download_async(file_name):
     print (f"Starting {file_name}")
     # Below statement says: "I'm waiting. Go work on something else."
     await asyncio.sleep(2)
 
-    # change the await statement to below.. and run 
-    # time.sleep(2) 
-    # then this behaves like a sequential one ... just the mechanism is different. 
-    
+    # change the await statement to below.. and run
+    # time.sleep(2)
+    # then this behaves like a sequential one ... just the mechanism is different.
+
     print (f"Finished {file_name}")
 
 async def run_asyncio():
-    print (f"\n --- Asyncio ---")
+    print ("\n --- Asyncio ---")
     start = time.perf_counter()
     await asyncio.gather(
         *(download_async(file) for file in FILES)
@@ -79,4 +79,3 @@ if __name__ == "__main__":
     run_threading()
 
     asyncio.run(run_asyncio())
-    

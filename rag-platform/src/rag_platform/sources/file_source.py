@@ -2,13 +2,13 @@
 # from pathlib import Path
 
 # from rag_platform.domain.identity import (
-#     calculate_checksum, 
-#     derive_document_id, 
+#     calculate_checksum,
+#     derive_document_id,
 #     generate_source_id,
 # )
 
 # from rag_platform.domain.models import (
-#     DocumentFormat, 
+#     DocumentFormat,
 #     DocumentSource,
 #     SourceDocument,
 #     SourceType,
@@ -17,9 +17,9 @@
 # from rag_platform.domain.types import TenantID
 
 # class FileSourceReader:
-   
+
 #     def __init__(self, root: path, tenant_id: TenantID) -> None:
-#         self.root = root 
+#         self.root = root
 #         self.tenant_id = tenant_id
 
 #         self.source = DocumentSource(
@@ -70,8 +70,7 @@
 #         }
 
 #         return mapping.get(suffix)
- 
 
 
 
-    
+

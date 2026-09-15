@@ -3,12 +3,13 @@
 from collections.abc import Sequence
 from typing import Protocol
 
-from rag_platform.domain.models import(
+from rag_platform.domain.models import (
     DocumentChunk,
     ParsedDocument,
-    SourceDocument,
     RetrievalResult,
-) 
+    SourceDocument,
+)
+
 
 class Parser(Protocol):
     """ Parse a source document into normalized text and metadata."""
@@ -41,7 +42,7 @@ class Generator(Protocol):
 
     def generate(self, query: str, context: Sequence[RetrievalResult],) -> str:
         ...
- 
+
 class SourceReader(Protocol):
     """Read raw documents from a configured source."""
     def read(self) -> Sequence[SourceDocument]:

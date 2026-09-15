@@ -1,18 +1,18 @@
-from pathlib import Path
 import json
-import logging
-from rag_platform.logging import configure_logging
+from pathlib import Path
+
 from rag_platform.connectors.filesystem import FilesystemConnector
+from rag_platform.domain.identity import generate_source_id
 from rag_platform.domain.models import DocumentFormat, DocumentSource, SourceType
 from rag_platform.domain.types import TenantID
-from rag_platform.domain.identity import generate_source_id
+from rag_platform.logging import configure_logging
 from rag_platform.parsers.markdown import MarkdownParser
 from rag_platform.parsers.pdf import PDFParser
 from rag_platform.parsers.text import TextParser
 
 logger = configure_logging(logger_name=__name__, log_file="logs/ingestion.log")
 
-# this path holds the parsed documents 
+# this path holds the parsed documents
 PARSED_ROOT = Path("data/processed/parsed/ZCompanyLLC")
 # this path and file will hold the metadata of all the successfully parsed documents
 METADATA_FILE = Path("data/processed/metadata/parsed_documents.jsonl")
@@ -23,12 +23,12 @@ PARSERS = {
     DocumentFormat.TXT: TextParser(),
     DocumentFormat.PDF: PDFParser(),
 }
-    
+
 def main() -> None:
-    
+
     root = Path("data/raw/ZCompanyLLC")
-    
-    logger.info("ingestion_started", 
+
+    logger.info("ingestion_started",
                 extra={"tenant_id": "ZCompanyLLC","source_path": str(root),
                        },
                        )
@@ -41,7 +41,7 @@ def main() -> None:
         tenant_id=TenantID("ZCompanyLLC"),
         source_type=SourceType.FILE,
         uri=str(root) )
-    
+
     connector = FilesystemConnector(source)
     documents = connector.read()
 
@@ -108,13 +108,13 @@ def main() -> None:
             )
             parsed_count += 1
 
-        except Exception as exc:
+        except Exception:
             logger.exception(
                 "document_processing_failed",
                 extra={
                     "document_id": str(document.id),
                 },
-            )  
+            )
             failed_count += 1
     logger.info(
         "ingestion_completed",

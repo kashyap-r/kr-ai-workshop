@@ -1,5 +1,6 @@
 from rag_platform.vector_store import VectorStore
 
+
 class FakeVectorStore:
     def upsert(self, chunks, embeddings) -> None:
         pass

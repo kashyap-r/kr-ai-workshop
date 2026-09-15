@@ -4,7 +4,7 @@ from rag_platform.indexing.indexer import Indexer, IndexingResult
 from rag_platform.indexing.manifest import DocumentIndexState, IndexManifest
 
 __all__ = [
-    "Indexer", 
+    "Indexer",
     "IndexingResult",
     "DocumentIndexState",
     "IndexManifest"

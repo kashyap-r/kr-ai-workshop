@@ -59,7 +59,7 @@ class FilesystemConnector:
 
             content = path.read_bytes()
             relative_path = str(path.relative_to(self.root))
-            
+
             document_id = derive_document_id(self.source.id, str(relative_path),)
 
             documents.append(

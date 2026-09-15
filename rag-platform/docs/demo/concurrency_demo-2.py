@@ -1,6 +1,6 @@
-import time
-import threading
 import multiprocessing
+import threading
+import time
 
 
 def heavy_calculation(n):

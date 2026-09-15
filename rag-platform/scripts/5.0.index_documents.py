@@ -2,13 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import logging
 from pathlib import Path
 from typing import Any
 
 from rag_platform.domain.models import DocumentChunk
 from rag_platform.embeddings import SentenceTransformerEmbeddingModel
-from rag_platform.indexing import IndexManifest, Indexer
+from rag_platform.indexing import Indexer, IndexManifest
 from rag_platform.logging import configure_logging
 from rag_platform.vector_store import ChromaVectorStore
 

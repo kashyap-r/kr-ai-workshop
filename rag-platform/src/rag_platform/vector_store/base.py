@@ -3,6 +3,7 @@ from typing import Protocol
 
 from rag_platform.domain.models import DocumentChunk, RetrievalResult
 
+
 class VectorStore(Protocol):
     """Contract for vector storage and similarity search."""
 

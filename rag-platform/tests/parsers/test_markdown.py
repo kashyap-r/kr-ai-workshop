@@ -1,7 +1,7 @@
-from datetime import datetime, UTC
+from datetime import UTC, datetime
 
-from rag_platform.domain.models import SourceDocument, DocumentFormat
-from rag_platform.domain.types import SourceID, DocumentID
+from rag_platform.domain.models import DocumentFormat, SourceDocument
+from rag_platform.domain.types import DocumentID, SourceID
 from rag_platform.parsers.markdown import MarkdownParser
 
 

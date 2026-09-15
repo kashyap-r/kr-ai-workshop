@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 
 from rag_platform.domain.models import DocumentChunk
-from rag_platform.indexing import IndexManifest, Indexer
+from rag_platform.indexing import Indexer, IndexManifest
 
 
 class FakeEmbeddingModel:

@@ -1,7 +1,8 @@
 import json
-import logging 
-from pathlib import Path 
-from typing import Any 
+import logging
+from pathlib import Path
+from typing import Any
+
 
 class JsonFormatter(logging.Formatter):
     """Format log records as structured JSON."""
@@ -16,7 +17,7 @@ class JsonFormatter(logging.Formatter):
 
         for key, value in record.__dict__.items():
             if key.startswith("_"):
-                continue 
+                continue
 
             if key in {
                 "name",
