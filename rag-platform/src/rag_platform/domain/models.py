@@ -2,6 +2,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import StrEnum
+from typing import Any
 
 from rag_platform.domain.types import ChunkID, DocumentID, SourceID, TenantID
 
@@ -71,9 +72,9 @@ class Chunk:
 
 
 """
-This class becomes important when we implement retrieval and ranking. 
-It will be used to represent the results of a retrieval operation, 
-including the chunk that was retrieved, the score assigned to that chunk 
+This class becomes important when we implement retrieval and ranking.
+It will be used to represent the results of a retrieval operation,
+including the chunk that was retrieved, the score assigned to that chunk
 by the retrieval model, and the rank of that chunk in the list of retrieved chunks.
 BM25
 dense retrieval

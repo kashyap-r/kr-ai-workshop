@@ -4,7 +4,8 @@ from typing import Any, cast
 
 import chromadb
 
-from rag_platform.domain.models import ChunkID, DocumentChunk, RetrievalResult
+from rag_platform.domain.models import DocumentChunk, RetrievalResult
+from rag_platform.domain.types import ChunkID
 
 
 class ChromaVectorStore:
@@ -33,10 +34,10 @@ class ChromaVectorStore:
 
         if not chunks:
             return
-
+        chroma_embeddings = cast( Any, [list(embedding) for embedding in embeddings],)
         self._collection.upsert(
             ids=[str(chunk.chunk_id) for chunk in chunks],
-            embeddings=[list(embedding) for embedding in embeddings],
+            embeddings=chroma_embeddings,
             documents=[chunk.text for chunk in chunks],
             metadatas=[
                 {
@@ -72,7 +73,7 @@ class ChromaVectorStore:
             raise ValueError("top_k must be positive.")
 
         results = self._collection.query(
-            query_embeddings=[list(embedding)],
+            query_embeddings=cast(Any, [list(embedding)]),
             n_results=top_k,
         )
 
@@ -95,12 +96,12 @@ class ChromaVectorStore:
         retrieval_results: list[RetrievalResult] = []
 
         for rank, (chunk_id, text, distance, metadata) in enumerate(
-            zip(ids, documents, distances, metadatas),
+            zip(ids, documents, distances, metadatas, strict=True),
             start=1,
         ):
             metadata_dict = cast(dict[str, Any], metadata)
 
-            document_id = cast(str, metadata_dict["document_id"])
+            # document_id = cast(str, metadata_dict["document_id"])
             document_version = int(metadata_dict["document_version"])
             chunking_version = cast(str, metadata_dict["chunking_version"])
             sequence_number = int(metadata_dict["sequence_number"])

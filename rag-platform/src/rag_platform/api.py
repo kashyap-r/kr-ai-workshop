@@ -1,15 +1,16 @@
+from collections.abc import Awaitable, Callable
 from time import perf_counter
 from uuid import uuid4
 
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
+from starlette.responses import Response
 
 from rag_platform.embeddings import SentenceTransformerEmbeddingModel
 from rag_platform.logging import configure_logging
 from rag_platform.query import QueryService
 from rag_platform.retrieval import DenseRetriever
 from rag_platform.vector_store import ChromaVectorStore
-
 
 MODEL_NAME = "BAAI/bge-small-en-v1.5"
 VECTOR_STORE_ROOT = "data/processed/vector_store/ZCompanyLLC"
@@ -101,8 +102,8 @@ app = FastAPI(
 @app.middleware("http")
 async def request_logging_middleware(
     request: Request,
-    call_next,
-):
+    call_next: Callable[[Request], Awaitable[Response]],
+) -> Response:
     request_id = request.headers.get("X-Request-ID") or str(uuid4())
 
     request.state.request_id = request_id

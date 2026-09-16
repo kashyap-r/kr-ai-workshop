@@ -1,4 +1,4 @@
-import pytest 
+import pytest
 
 from rag_platform.retrieval import DenseRetriever
 

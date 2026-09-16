@@ -34,30 +34,30 @@
 #     assert len(documents) == 1
 #     assert documents[0].checksum == calculate_checksum(content)
 
-"""
-this module is not needed aymore .. 
-new connector has this constructor:
 
-FilesystemConnector(source: DocumentSource)
+# this module is not needed aymore ..
+# new connector has this constructor:
 
-But the old test is still doing:
+# FilesystemConnector(source: DocumentSource)
 
-FilesystemConnector(
-    tmp_path,
-    TenantID("tenant-1"),
-)
+# But the old test is still doing:
 
-Hence the error :
-TypeError:
-FilesystemConnector.__init__() takes 2 positional arguments
-but 3 were given
+# FilesystemConnector(
+#     tmp_path,
+#     TenantID("tenant-1"),
+# )
 
-Solution: 
-We no longer need: tests/sources/test_filesource.py
-because those tests are testing the old FileSourceReader design.
+# Hence the error :
+# TypeError:
+# FilesystemConnector.__init__() takes 2 positional arguments
+# but 3 were given
 
-the new design is 
-DocumentSource
-      +
-FilesystemConnector
-"""
+# Solution:
+# We no longer need: tests/sources/test_filesource.py
+# because those tests are testing the old FileSourceReader design.
+
+# the new design is
+# DocumentSource
+#       +
+# FilesystemConnector
+

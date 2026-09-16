@@ -1,4 +1,4 @@
-from rag_platform.domain.models import RetrievalResult
+
 from rag_platform.query import QueryService
 
 

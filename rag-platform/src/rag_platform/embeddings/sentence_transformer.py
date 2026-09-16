@@ -1,4 +1,5 @@
 from collections.abc import Sequence
+from typing import cast
 
 from sentence_transformers import SentenceTransformer
 
@@ -23,4 +24,4 @@ class SentenceTransformerEmbeddingModel:
             show_progress_bar=False,
         )
 
-        return embeddings.tolist()
+        return cast(list[list[float]], embeddings.tolist())

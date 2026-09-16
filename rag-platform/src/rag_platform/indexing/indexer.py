@@ -122,13 +122,15 @@ class Indexer:
             )
 
         for document_id in sorted(documents):
-            chunks = sorted(documents[document_id], key=lambda item: item.sequence_number)
+            chunks = sorted(
+                documents[document_id],
+                key=lambda item: item.sequence_number)
             current_hash = self.document_hash(chunks)
-            old_state = manifest.documents.get(document_id)
+            current_state = manifest.documents.get(document_id)
 
-            if old_state is not None and old_state.document_hash == current_hash:
+            if current_state is not None and current_state.document_hash == current_hash:
                 unchanged_count += 1
-                updated_documents[document_id] = old_state
+                updated_documents[document_id] = current_state
                 LOGGER.info(
                     "document_unchanged_skipped",
                     extra={
@@ -139,7 +141,7 @@ class Indexer:
                 )
                 continue
 
-            if old_state is None:
+            if current_state is None:
                 new_count += 1
                 LOGGER.info(
                     "document_new_indexing",
@@ -151,13 +153,13 @@ class Indexer:
                     "document_changed_reindexing",
                     extra={
                         "document_id": document_id,
-                        "old_chunk_count": len(old_state.chunk_ids),
+                        "old_chunk_count": len(current_state.chunk_ids),
                         "new_chunk_count": len(chunks),
                     },
                 )
-                if old_state.chunk_ids:
-                    self.vector_store.delete(old_state.chunk_ids)
-                    chunks_deleted += len(old_state.chunk_ids)
+                if current_state.chunk_ids:
+                    self.vector_store.delete(current_state.chunk_ids)
+                    chunks_deleted += len(current_state.chunk_ids)
 
             self._index_document(document_id, chunks)
             chunks_indexed += len(chunks)

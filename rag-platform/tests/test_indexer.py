@@ -1,6 +1,7 @@
 from collections.abc import Sequence
+from typing import cast
 
-from rag_platform.domain.models import DocumentChunk
+from rag_platform.domain.models import ChunkID, DocumentChunk, DocumentID
 from rag_platform.indexing import Indexer, IndexManifest
 
 
@@ -20,7 +21,10 @@ class FakeVectorStore:
         self.deletes: list[list[str]] = []
         self.delete_all_calls = 0
 
-    def upsert(self, chunks: Sequence[DocumentChunk], embeddings: Sequence[Sequence[float]]) -> None:
+    def upsert(
+            self,
+            chunks: Sequence[DocumentChunk],
+            embeddings: Sequence[Sequence[float]]) -> None:
         assert len(chunks) == len(embeddings)
         self.upserts.append([str(chunk.chunk_id) for chunk in chunks])
 
@@ -36,8 +40,8 @@ class FakeVectorStore:
 
 def chunk(document_id: str, chunk_id: str, sequence: int, text: str) -> DocumentChunk:
     return DocumentChunk(
-        chunk_id=chunk_id,
-        document_id=document_id,
+        chunk_id=cast(ChunkID, chunk_id),
+        document_id=cast(DocumentID, document_id),
         document_version=1,
         chunking_version="recursive-v1",
         text=text,
@@ -77,8 +81,10 @@ def test_unchanged_document_is_skipped() -> None:
     indexer, embedder, store = make_indexer()
     docs = {"doc-1": [chunk("doc-1", "c1", 0, "hello")]}
     manifest = IndexManifest.empty(index_version="index-v1", embedding_model="test-model")
-    manifest.documents["doc-1"] = __import__("rag_platform.indexing", fromlist=["DocumentIndexState"]).DocumentIndexState(
-        document_hash=indexer.document_hash(docs["doc-1"]), chunk_ids=["c1"]
+    manifest.documents["doc-1"] = __import__(
+                "rag_platform.indexing",
+                fromlist=["DocumentIndexState"]).DocumentIndexState(
+                    document_hash=indexer.document_hash(docs["doc-1"]), chunk_ids=["c1"]
     )
 
     result = indexer.synchronize(docs, manifest)
