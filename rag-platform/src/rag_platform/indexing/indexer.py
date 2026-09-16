@@ -6,6 +6,7 @@ import logging
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
+from rag_platform.domain.contracts import SparseIndex
 from rag_platform.domain.models import DocumentChunk
 from rag_platform.embeddings.base import EmbeddingModel
 from rag_platform.indexing.manifest import DocumentIndexState, IndexManifest
@@ -37,10 +38,12 @@ class Indexer:
         embedding_model: EmbeddingModel,
         vector_store: VectorStore,
         embedding_model_name: str,
+        sparse_index: SparseIndex | None = None,
     ) -> None:
         self.embedding_model = embedding_model
         self.vector_store = vector_store
         self.embedding_model_name = embedding_model_name
+        self.sparse_index = sparse_index
 
     @staticmethod
     def document_hash(chunks: Sequence[DocumentChunk]) -> str:
@@ -111,6 +114,8 @@ class Indexer:
             old_state = manifest.documents[document_id]
             if old_state.chunk_ids:
                 self.vector_store.delete(old_state.chunk_ids)
+                if self.sparse_index is not None:
+                    self.sparse_index.delete(old_state.chunk_ids)
                 chunks_deleted += len(old_state.chunk_ids)
             deleted_count += 1
             LOGGER.info(
@@ -159,15 +164,22 @@ class Indexer:
                 )
                 if current_state.chunk_ids:
                     self.vector_store.delete(current_state.chunk_ids)
+                    if self.sparse_index is not None:
+                        self.sparse_index.delete(current_state.chunk_ids)
                     chunks_deleted += len(current_state.chunk_ids)
 
             self._index_document(document_id, chunks)
+            if self.sparse_index is not None:
+                self.sparse_index.upsert(chunks)
             chunks_indexed += len(chunks)
             embeddings_generated += len(chunks)
             updated_documents[document_id] = DocumentIndexState(
                 document_hash=current_hash,
                 chunk_ids=[str(chunk.chunk_id) for chunk in chunks],
             )
+
+        if self.sparse_index is not None:
+            self.sparse_index.save()
 
         manifest.documents = updated_documents
         result = IndexingResult(

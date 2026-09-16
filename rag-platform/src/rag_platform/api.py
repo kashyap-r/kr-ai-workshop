@@ -9,11 +9,18 @@ from starlette.responses import Response
 from rag_platform.embeddings import SentenceTransformerEmbeddingModel
 from rag_platform.logging import configure_logging
 from rag_platform.query import QueryService
-from rag_platform.retrieval import DenseRetriever
+from rag_platform.retrieval import (
+    BM25IndexStore,
+    BM25Retriever,
+    DenseRetriever,
+    HybridRetriever,
+    RRFFusion,
+)
 from rag_platform.vector_store import ChromaVectorStore
 
 MODEL_NAME = "BAAI/bge-small-en-v1.5"
 VECTOR_STORE_ROOT = "data/processed/vector_store/ZCompanyLLC"
+SPARSE_INDEX_PATH = f"{VECTOR_STORE_ROOT}/bm25_index.json"
 COLLECTION_NAME = "zcompany_hr_chunks"
 
 DEFAULT_TOP_K = 5
@@ -74,9 +81,16 @@ def create_query_service() -> QueryService:
         embedding_model=MODEL_NAME,
     )
 
-    retriever = DenseRetriever(
+    dense_retriever = DenseRetriever(
         embedding_model=embedding_model,
         vector_store=vector_store,
+    )
+    sparse_index = BM25IndexStore(SPARSE_INDEX_PATH)
+    sparse_retriever = BM25Retriever(sparse_index)
+    retriever = HybridRetriever(
+        dense_retriever=dense_retriever,
+        sparse_retriever=sparse_retriever,
+        fusion=RRFFusion(),
     )
 
     return QueryService(retriever)

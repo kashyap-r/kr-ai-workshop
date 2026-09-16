@@ -52,13 +52,33 @@ def chunk(document_id: str, chunk_id: str, sequence: int, text: str) -> Document
     )
 
 
-def make_indexer() -> tuple[Indexer, FakeEmbeddingModel, FakeVectorStore]:
+class FakeSparseIndex:
+    def __init__(self) -> None:
+        self.upserts: list[list[str]] = []
+        self.deletes: list[list[str]] = []
+        self.save_calls = 0
+
+    def upsert(self, chunks: Sequence[DocumentChunk]) -> None:
+        self.upserts.append([str(chunk.chunk_id) for chunk in chunks])
+
+    def delete(self, ids: Sequence[str]) -> None:
+        self.deletes.append([str(chunk_id) for chunk_id in ids])
+
+    def delete_all(self) -> None:
+        self.deletes.append(["*"])
+
+    def save(self) -> None:
+        self.save_calls += 1
+
+
+def make_indexer(sparse: FakeSparseIndex | None = None) -> tuple[Indexer, FakeEmbeddingModel, FakeVectorStore]:
     embedder = FakeEmbeddingModel()
     store = FakeVectorStore()
     indexer = Indexer(
         embedding_model=embedder,
         vector_store=store,
         embedding_model_name="test-model",
+        sparse_index=sparse,
     )
     return indexer, embedder, store
 
@@ -127,6 +147,22 @@ def test_deleted_document_is_removed_from_index_and_manifest() -> None:
     assert result.chunks_deleted == 2
     assert store.deletes == [["c1", "c2"]]
     assert "doc-1" not in manifest.documents
+
+
+def test_sparse_index_follows_incremental_lifecycle() -> None:
+    sparse = FakeSparseIndex()
+    indexer, _, store = make_indexer(sparse)
+    manifest = IndexManifest.empty(index_version="index-v1", embedding_model="test-model")
+    docs = {"doc-1": [chunk("doc-1", "c1", 0, "hello")]}
+
+    indexer.synchronize(docs, manifest)
+    assert sparse.upserts == [["c1"]]
+    assert sparse.save_calls == 1
+
+    indexer.synchronize({}, manifest)
+    assert sparse.deletes == [["c1"]]
+    assert sparse.save_calls == 2
+    assert store.deletes == [["c1"]]
 
 
 def test_empty_document_can_be_indexed_without_embedding() -> None:

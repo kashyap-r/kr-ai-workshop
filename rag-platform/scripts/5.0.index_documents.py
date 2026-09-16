@@ -10,11 +10,13 @@ from rag_platform.embeddings import SentenceTransformerEmbeddingModel
 from rag_platform.indexing import Indexer, IndexManifest
 from rag_platform.logging import configure_logging
 from rag_platform.vector_store import ChromaVectorStore
+from rag_platform.retrieval import BM25IndexStore
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CHUNKS_ROOT = PROJECT_ROOT / "data/processed/chunks/ZCompanyLLC"
 VECTOR_STORE_ROOT = PROJECT_ROOT / "data/processed/vector_store/ZCompanyLLC"
 MANIFEST_PATH = VECTOR_STORE_ROOT / "index_manifest.json"
+SPARSE_INDEX_PATH = VECTOR_STORE_ROOT / "bm25_index.json"
 LOG_PATH = PROJECT_ROOT / "logs/indexing.log"
 EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 COLLECTION_NAME = "zcompany_hr_chunks"
@@ -78,10 +80,12 @@ def main() -> None:
             embedding_model=EMBEDDING_MODEL_NAME,
         )
         embedding_model = SentenceTransformerEmbeddingModel(EMBEDDING_MODEL_NAME)
+        sparse_index = BM25IndexStore(SPARSE_INDEX_PATH)
         indexer = Indexer(
             embedding_model=embedding_model,
             vector_store=vector_store,
             embedding_model_name=EMBEDDING_MODEL_NAME,
+            sparse_index=sparse_index,
         )
 
         if args.rebuild:
@@ -90,6 +94,7 @@ def main() -> None:
                 extra={"manifest_path": str(MANIFEST_PATH)},
             )
             vector_store.delete_all()
+            sparse_index.delete_all()
             manifest = IndexManifest.empty(
                 index_version=INDEX_VERSION,
                 embedding_model=EMBEDDING_MODEL_NAME,
