@@ -1,6 +1,6 @@
 from collections.abc import Sequence
 
-from rag_platform.domain.contracts import Retriever
+from rag_platform.domain.contracts import Reranker, Retriever
 from rag_platform.domain.models import RetrievalResult
 from rag_platform.logging import configure_logging
 from rag_platform.query.hybrid import HybridQueryUnderstanding
@@ -23,9 +23,11 @@ class QueryService:
     def __init__(
         self,
         retriever: Retriever,
+        reranker: Reranker | None = None,
         query_understanding: HybridQueryUnderstanding | None = None,
     ) -> None:
         self._retriever = retriever
+        self._reranker = reranker
         self._query_understanding = query_understanding or HybridQueryUnderstanding()
 
     def understand(
@@ -78,7 +80,21 @@ class QueryService:
             },
         )
 
-        return self._retriever.retrieve(
+        # return self._retriever.retrieve(
+        #     understanding.retrieval_query,
+        #     top_k=top_k,
+        # )
+
+        results = self._retriever.retrieve(
             understanding.retrieval_query,
-            top_k=top_k,
+            top_k=top_k * 4 if self._reranker else top_k,
         )
+
+        if self._reranker:
+            results = self._reranker.rerank(
+                understanding.retrieval_query,
+                results,
+            )
+            return results[:top_k]
+
+        return results

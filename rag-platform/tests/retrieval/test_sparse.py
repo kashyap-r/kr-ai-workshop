@@ -1,5 +1,3 @@
-from typing import cast
-
 import pytest
 
 from rag_platform.domain.models import DocumentChunk

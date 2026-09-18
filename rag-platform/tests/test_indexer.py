@@ -71,7 +71,9 @@ class FakeSparseIndex:
         self.save_calls += 1
 
 
-def make_indexer(sparse: FakeSparseIndex | None = None) -> tuple[Indexer, FakeEmbeddingModel, FakeVectorStore]:
+def make_indexer(
+        sparse: FakeSparseIndex | None = None
+        ) -> tuple[Indexer, FakeEmbeddingModel, FakeVectorStore]:
     embedder = FakeEmbeddingModel()
     store = FakeVectorStore()
     indexer = Indexer(

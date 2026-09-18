@@ -87,3 +87,23 @@ class RetrievalResult:
     score: float
     rank: int
 
+
+""" Adding the below contracts for context assembly """
+@dataclass(frozen=True, slots=True)
+class ContextChunk:
+    """A retrieved chunk selected for the LLM context."""
+
+    chunk: DocumentChunk
+    score: float
+    rank: int
+    token_count: int
+
+
+@dataclass(frozen=True, slots=True)
+class ContextPackage:
+    """Structured context assembled for downstream generation."""
+
+    query: str
+    chunks: tuple[ContextChunk, ...]
+    context_text: str
+    token_count: int

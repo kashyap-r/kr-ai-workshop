@@ -4,6 +4,7 @@ from collections.abc import Sequence
 from typing import Protocol
 
 from rag_platform.domain.models import (
+    ContextPackage,
     DocumentChunk,
     ParsedDocument,
     RetrievalResult,
@@ -89,4 +90,22 @@ class SourceReader(Protocol):
     """Read raw documents from a configured source."""
 
     def read(self) -> Sequence[SourceDocument]:
+        ...
+
+""" Added the below definitions as part of Context Assembly"""
+class TokenCounter(Protocol):
+    """Count tokens for context-budget management."""
+
+    def count(self, text: str) -> int:
+        ...
+
+
+class ContextAssemblerContract(Protocol):
+    """Assemble ranked retrieval results into bounded LLM context."""
+
+    def assemble(
+        self,
+        query: str,
+        results: Sequence[RetrievalResult],
+    ) -> ContextPackage:
         ...

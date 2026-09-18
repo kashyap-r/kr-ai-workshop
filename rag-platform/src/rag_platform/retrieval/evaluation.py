@@ -5,7 +5,9 @@ from collections.abc import Iterable, Sequence
 from rag_platform.domain.models import RetrievalResult
 
 
-def recall_at_k(results: Sequence[RetrievalResult], relevant_ids: Iterable[str], k: int) -> float:
+def recall_at_k(
+        results: Sequence[RetrievalResult],
+        relevant_ids: Iterable[str], k: int) -> float:
     relevant = {str(item) for item in relevant_ids}
     if not relevant:
         raise ValueError("relevant_ids must not be empty.")
@@ -15,7 +17,9 @@ def recall_at_k(results: Sequence[RetrievalResult], relevant_ids: Iterable[str],
     return len(retrieved & relevant) / len(relevant)
 
 
-def precision_at_k(results: Sequence[RetrievalResult], relevant_ids: Iterable[str], k: int) -> float:
+def precision_at_k(
+        results: Sequence[RetrievalResult],
+        relevant_ids: Iterable[str], k: int) -> float:
     relevant = {str(item) for item in relevant_ids}
     if not relevant:
         raise ValueError("relevant_ids must not be empty.")
@@ -24,10 +28,14 @@ def precision_at_k(results: Sequence[RetrievalResult], relevant_ids: Iterable[st
     retrieved = results[:k]
     if not retrieved:
         return 0.0
-    return sum(str(result.chunk.chunk_id) in relevant for result in retrieved) / len(retrieved)
+    return sum(
+        str(result.chunk.chunk_id) in relevant
+        for result in retrieved) / len(retrieved)
 
 
-def reciprocal_rank(results: Sequence[RetrievalResult], relevant_ids: Iterable[str]) -> float:
+def reciprocal_rank(
+        results: Sequence[RetrievalResult],
+        relevant_ids: Iterable[str]) -> float:
     relevant = {str(item) for item in relevant_ids}
     if not relevant:
         raise ValueError("relevant_ids must not be empty.")

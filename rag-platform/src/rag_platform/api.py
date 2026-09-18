@@ -12,6 +12,7 @@ from rag_platform.query import QueryService
 from rag_platform.retrieval import (
     BM25IndexStore,
     BM25Retriever,
+    CrossEncoderReranker,
     DenseRetriever,
     HybridRetriever,
     RRFFusion,
@@ -92,8 +93,12 @@ def create_query_service() -> QueryService:
         sparse_retriever=sparse_retriever,
         fusion=RRFFusion(),
     )
+    reranker = CrossEncoderReranker()
 
-    return QueryService(retriever)
+    return QueryService(
+        retriever=retriever,
+        reranker=reranker,
+    )
 
 
 query_service = create_query_service()
