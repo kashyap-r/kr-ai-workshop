@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.responses import Response
 
+from rag_platform.context import ContextAssembler
 from rag_platform.embeddings import SentenceTransformerEmbeddingModel
 from rag_platform.logging import configure_logging
 from rag_platform.query import QueryService
@@ -59,11 +60,24 @@ class QueryResult(BaseModel):
     rank: int
     metadata: dict[str, str]
 
+class ContextChunkResponse(BaseModel):
+    chunk_id: str
+    document_id: str
+    score: float
+    rank: int
+    token_count: int
+
+class ContextResponse(BaseModel):
+    text: str
+    chunks: list[ContextChunkResponse]
+    chunk_count: int
+    token_count: int
 
 class QueryResponse(BaseModel):
     query: str
     results: list[QueryResult]
     result_count: int
+    context: ContextResponse
     latency_ms: float
 
 
@@ -96,8 +110,9 @@ def create_query_service() -> QueryService:
     reranker = CrossEncoderReranker()
 
     return QueryService(
-        retriever=retriever,
+        retriever,
         reranker=reranker,
+        context_assembler=ContextAssembler(),
     )
 
 
@@ -214,7 +229,11 @@ def query(
     start = perf_counter()
 
     try:
-        results = query_service.query(
+        # results = query_service.query(
+        #     payload.query,
+        #     top_k=payload.top_k,
+        # )
+        results, context_package = query_service.query_with_context(
             payload.query,
             top_k=payload.top_k,
         )
@@ -259,29 +278,71 @@ def query(
 
     latency_ms = (perf_counter() - start) * 1000
 
+    # logger.info(
+    #     "query_completed",
+    #     extra={
+    #         "request_id": request_id,
+    #         "top_k": payload.top_k,
+    #         "result_count": len(results),
+    #         "latency_ms": round(latency_ms, 2),
+    #     },
+    # )
     logger.info(
         "query_completed",
         extra={
             "request_id": request_id,
             "top_k": payload.top_k,
             "result_count": len(results),
+            "context_chunk_count": len(context_package.chunks),
+            "context_token_count": context_package.token_count,
             "latency_ms": round(latency_ms, 2),
         },
     )
 
+    # return QueryResponse(
+    #     query=payload.query,
+    #     results=[
+    #         QueryResult(
+    #             chunk_id=str(result.chunk.chunk_id),
+    #             document_id=str(result.chunk.document_id),
+    #             text=result.chunk.text,
+    #             score=result.score,
+    #             rank=result.rank,
+    #             metadata=dict(result.chunk.metadata),
+    #         )
+    #         for result in results
+    #     ],
+    #     result_count=len(results),
+    #     latency_ms=round(latency_ms, 2),
+    # )
     return QueryResponse(
-        query=payload.query,
-        results=[
-            QueryResult(
-                chunk_id=str(result.chunk.chunk_id),
-                document_id=str(result.chunk.document_id),
-                text=result.chunk.text,
-                score=result.score,
-                rank=result.rank,
-                metadata=dict(result.chunk.metadata),
+    query=payload.query,
+    results=[
+        QueryResult(
+            chunk_id=str(result.chunk.chunk_id),
+            document_id=str(result.chunk.document_id),
+            text=result.chunk.text,
+            score=result.score,
+            rank=result.rank,
+            metadata=dict(result.chunk.metadata),
+        )
+        for result in results
+    ],
+    result_count=len(results),
+    context=ContextResponse(
+        text=context_package.context_text,
+        chunks=[
+            ContextChunkResponse(
+                chunk_id=str(context_chunk.chunk.chunk_id),
+                document_id=str(context_chunk.chunk.document_id),
+                score=context_chunk.score,
+                rank=context_chunk.rank,
+                token_count=context_chunk.token_count,
             )
-            for result in results
+            for context_chunk in context_package.chunks
         ],
-        result_count=len(results),
-        latency_ms=round(latency_ms, 2),
-    )
+        chunk_count=len(context_package.chunks),
+        token_count=context_package.token_count,
+    ),
+    latency_ms=round(latency_ms, 2),
+)

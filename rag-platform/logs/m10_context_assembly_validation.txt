@@ -1,0 +1,743 @@
+=== M10.3 — Real Context Assembly Validation ===
+
+================================================================================
+QUERY 1
+================================================================================
+
+Query: What is the company's policy for working from home?
+
+M8 candidates:        20
+M9 reranked:          20
+M9 final top-k:       5
+M10 context chunks:   5
+M10 context tokens:   762
+M10 budget utilization: 19.05%
+
+M10 CONTEXT CHUNKS
+--------------------------------------------------------------------------------
+[1] rank=1 score=3.299588 tokens=121
+    document_id=7f1891083cf4e02bc28e1d0d69bd124737fd0b471c62bac6f96c1a2bd07a70e2
+    chunk_id=10dddf5c4a61675482a0eee71cd158f4dc04f3c5de7c4c0f4f717d71f2989554
+    sequence=0
+    text='# India Work From Home Policy\n\nEmployees based in India may request up to 2 regular remote-working days per week.\n\nTemporary work from another country:\n- Must be recorded before travel.\n- Requires manager approval.\n- Germany- and India-based employees are normally subject to host-country leave/holid'
+
+[2] rank=2 score=3.219098 tokens=122
+    document_id=1cf4a94b39d024059085e14d2de8b374b82adc3dc5afdca4aae502252b06081b
+    chunk_id=60e013db5ce2beb6e6587c2288a16fbfa29cd62bf51a0fd163c213408c943ad7
+    sequence=0
+    text='# Germany Work From Home Policy\n\nEmployees based in Germany may request up to 2 regular remote-working days per week.\n\nTemporary work from another country:\n- Must be recorded before travel.\n- Requires manager approval.\n- Germany- and India-based employees are normally subject to host-country leave/h'
+
+[3] rank=3 score=2.917042 tokens=121
+    document_id=be9e059a7a29136b724d1b4a68a4705fdfa4cb5cf4e4d53f47569d8f76a6b62a
+    chunk_id=907cc45af5c68de79668126dc4002bd300189fa8c0049018dc239720b25c84a0
+    sequence=0
+    text='# Sweden Work From Home Policy\n\nEmployees based in Sweden may request up to 2 regular remote-working days per week.\n\nTemporary work from another country:\n- Must be recorded before travel.\n- Requires manager approval.\n- Germany- and India-based employees are normally subject to host-country leave/hol'
+
+[4] rank=4 score=-2.166791 tokens=250
+    document_id=714c5decb5bebce5b0a661424e7ebe01db3943272e7fa86a97048131e585c178
+    chunk_id=fdc1ea27e75352ddc08b1b4f20cff1064394e29d95b3f8c6001a95dd84bfbda3
+    sequence=0
+    text='# Global HR Policy Jurisdiction\n\n## Purpose\nThis fictional policy defines which country policy governs leave and holiday questions.\n\n### Base-location rule\nAn employee normally follows the HR policy of their permanent base location.\n\n### Host-country exception\nFor a Germany- or India-based employee '
+
+[5] rank=5 score=-3.163893 tokens=148
+    document_id=a98b954018c768cf217a721d1c066fd33416c2ac6b43b92c1d5eda5b5b9be9a5
+    chunk_id=d31ea3029c942026ccc8d99b1792eee2ba3b0368d6f28e30f2c2f488330b647e
+    sequence=0
+    text='# Performance Management and Extended Leave\n\nEmployees on a formal Performance Improvement Plan (PIP) retain their contractual and statutory leave rights.\n\nHowever, fictional company policy requires:\n- HR review for extended leave of more than 10 consecutive working days during an active PIP.\n- Depa'
+
+FORMATTED CONTEXT
+--------------------------------------------------------------------------------
+[Context 1]
+Document ID: 7f1891083cf4e02bc28e1d0d69bd124737fd0b471c62bac6f96c1a2bd07a70e2
+Chunk ID: 10dddf5c4a61675482a0eee71cd158f4dc04f3c5de7c4c0f4f717d71f2989554
+Content:
+# India Work From Home Policy
+
+Employees based in India may request up to 2 regular remote-working days per week.
+
+Temporary work from another country:
+- Must be recorded before travel.
+- Requires manager approval.
+- Germany- and India-based employees are normally subject to host-country leave/holiday rules while temporarily working abroad.
+- Sweden-based employees remain under Swedish HQ policy globally.
+
+Remote work does not itself change an employee's permanent base location.
+
+
+[Context 2]
+Document ID: 1cf4a94b39d024059085e14d2de8b374b82adc3dc5afdca4aae502252b06081b
+Chunk ID: 60e013db5ce2beb6e6587c2288a16fbfa29cd62bf51a0fd163c213408c943ad7
+Content:
+# Germany Work From Home Policy
+
+Employees based in Germany may request up to 2 regular remote-working days per week.
+
+Temporary work from another country:
+- Must be recorded before travel.
+- Requires manager approval.
+- Germany- and India-based employees are normally subject to host-country leave/holiday rules while temporarily working abroad.
+- Sweden-based employees remain under Swedish HQ policy globally.
+
+Remote work does not itself change an employee's permanent base location.
+
+
+[Context 3]
+Document ID: be9e059a7a29136b724d1b4a68a4705fdfa4cb5cf4e4d53f47569d8f76a6b62a
+Chunk ID: 907cc45af5c68de79668126dc4002bd300189fa8c0049018dc239720b25c84a0
+Content:
+# Sweden Work From Home Policy
+
+Employees based in Sweden may request up to 2 regular remote-working days per week.
+
+Temporary work from another country:
+- Must be recorded before travel.
+- Requires manager approval.
+- Germany- and India-based employees are normally subject to host-country leave/holiday rules while temporarily working abroad.
+- Sweden-based employees remain under Swedish HQ policy globally.
+
+Remote work does not itself change an employee's permanent base location.
+
+
+[Context 4]
+Document ID: 714c5decb5bebce5b0a661424e7ebe01db3943272e7fa86a97048131e585c178
+Chunk ID: fdc1ea27e75352ddc08b1b4f20cff1064394e29d95b3f8c6001a95dd84bfbda3
+Content:
+# Global HR Policy Jurisdiction
+
+## Purpose
+This fictional policy defines which country policy governs leave and holiday questions.
+
+### Base-location rule
+An employee normally follows the HR policy of their permanent base location.
+
+### Host-country exception
+For a Germany- or India-based employee who is temporarily working from another country, the host country's leave and holiday rules apply for the duration of the temporary assignment, unless a contract or assignment letter states otherwise.
+
+### Sweden headquarters exception
+Sweden is the company headquarters. A Sweden-based employee remains governed by Swedish HQ policy while temporarily working outside Sweden. The host-country exception does not override Swedish HQ policy for Sweden-based employees.
+
+### Permanent transfer
+A permanent transfer changes the employee's base location. The employee then follows the policy of the new base country from the effective transfer date.
+
+### Contract precedence
+Where an employment contract e
+
+[Context 5]
+Document ID: a98b954018c768cf217a721d1c066fd33416c2ac6b43b92c1d5eda5b5b9be9a5
+Chunk ID: d31ea3029c942026ccc8d99b1792eee2ba3b0368d6f28e30f2c2f488330b647e
+Content:
+# Performance Management and Extended Leave
+
+Employees on a formal Performance Improvement Plan (PIP) retain their contractual and statutory leave rights.
+
+However, fictional company policy requires:
+- HR review for extended leave of more than 10 consecutive working days during an active PIP.
+- Department-head approval when an extended leave overlaps a critical delivery period.
+- Leave should not be described as denied solely because the employee is on PIP unless the source record explicitly says it was denied.
+
+This policy is intended to create realistic multi-document retrieval cases.
+
+
+================================================================================
+QUERY 2
+================================================================================
+
+Query: How much maternity leave is available in Germany?
+
+M8 candidates:        20
+M9 reranked:          20
+M9 final top-k:       5
+M10 context chunks:   5
+M10 context tokens:   935
+M10 budget utilization: 23.38%
+
+M10 CONTEXT CHUNKS
+--------------------------------------------------------------------------------
+[1] rank=1 score=3.817271 tokens=169
+    document_id=759db3061947c05d74296cf212d9f727f6776dbfce632aadfec96721cf7d8bf3
+    chunk_id=dd9efa0f3920d821577765f517da726ef23437bb3522c925767ed9a268c9d41e
+    sequence=0
+    text='Employment Agreement — Lukas Schneider\nEmployee ID: DE002\nBase location: Germany\nDepartment: Customer Success\nRole: Customer Success Manager\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 28 working'
+
+[2] rank=2 score=2.971445 tokens=164
+    document_id=d37e2006c048d84b91762ce223af3a513f0eac3a387b017e4ce80e1e210be44e
+    chunk_id=3ec61d9310a47ea23ab81216d9ca32926b6fff6874f711e7f36f25694d4e2fa7
+    sequence=0
+    text='Employment Agreement — Clara Becker\nEmployee ID: DE005\nBase location: Germany\nDepartment: Finance\nRole: Senior Financial Analyst\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 28 working days.\nFicti'
+
+[3] rank=3 score=2.805743 tokens=173
+    document_id=365fdb4e1167705e0241fbf31540abc08687ff477f4e540a36ce8b9ca53fed7d
+    chunk_id=cf65a5bcac1b9a129af4fef391ed3ca5be7dea857eb83377b44cbd0b8d0392e3
+    sequence=0
+    text='Employment Agreement — Jonas Wagner\nEmployee ID: DE004\nBase location: Germany\nDepartment: Engineering\nRole: Site Reliability Engineer\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 28 working days.\n'
+
+[4] rank=4 score=2.767799 tokens=243
+    document_id=4dd3d5a77530936d7966694bd95d3c5b704a7ccb7ced608e1a767aded7ebeee3
+    chunk_id=4ec5889d0414db38ecf2168673856474b1ed65c2d4594e1801a1fc5f24e459a0
+    sequence=0
+    text='# Germany Leave and Work Policy\n\n**Fictional policy for the RAG demo.**\n\n## Annual leave\n- Standard annual leave entitlement: **28 working days per calendar year**.\n- Carry-forward limit: **5 days**.\n- Leave of more than 10 consecutive working days requires manager and HR approval.\n- Existing busine'
+
+[5] rank=5 score=2.683956 tokens=186
+    document_id=66c2f0dcb70a7870c4c4f99a7b273487ce289c82404042eaccf08df2c653d3a8
+    chunk_id=03124539861e45d0f012492b64a9ef2e46ac10bc5d4b892836f11d91c8f2a65c
+    sequence=0
+    text='Employment Agreement — Hannah Weber\nEmployee ID: DE001\nBase location: Germany\nDepartment: Engineering\nRole: Senior Software Engineer\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 28 working days.\nF'
+
+FORMATTED CONTEXT
+--------------------------------------------------------------------------------
+[Context 1]
+Document ID: 759db3061947c05d74296cf212d9f727f6776dbfce632aadfec96721cf7d8bf3
+Chunk ID: dd9efa0f3920d821577765f517da726ef23437bb3522c925767ed9a268c9d41e
+Content:
+Employment Agreement — Lukas Schneider
+Employee ID: DE002
+Base location: Germany
+Department: Customer Success
+Role: Customer Success Manager
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 28 working days.
+Fictional maternity leave entitlement: 6 months.
+Fictional paternity/partner leave entitlement: 8 weeks.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+Contract grants 30 annual leave days instead of the standard German 28.
+
+
+[Context 2]
+Document ID: d37e2006c048d84b91762ce223af3a513f0eac3a387b017e4ce80e1e210be44e
+Chunk ID: 3ec61d9310a47ea23ab81216d9ca32926b6fff6874f711e7f36f25694d4e2fa7
+Content:
+Employment Agreement — Clara Becker
+Employee ID: DE005
+Base location: Germany
+Department: Finance
+Role: Senior Financial Analyst
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 28 working days.
+Fictional maternity leave entitlement: 6 months.
+Fictional paternity/partner leave entitlement: 8 weeks.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+Contract grants one additional personal day each calendar year.
+
+
+[Context 3]
+Document ID: 365fdb4e1167705e0241fbf31540abc08687ff477f4e540a36ce8b9ca53fed7d
+Chunk ID: cf65a5bcac1b9a129af4fef391ed3ca5be7dea857eb83377b44cbd0b8d0392e3
+Content:
+Employment Agreement — Jonas Wagner
+Employee ID: DE004
+Base location: Germany
+Department: Engineering
+Role: Site Reliability Engineer
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 28 working days.
+Fictional maternity leave entitlement: 6 months.
+Fictional paternity/partner leave entitlement: 8 weeks.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+[Context 4]
+Document ID: 4dd3d5a77530936d7966694bd95d3c5b704a7ccb7ced608e1a767aded7ebeee3
+Chunk ID: 4ec5889d0414db38ecf2168673856474b1ed65c2d4594e1801a1fc5f24e459a0
+Content:
+# Germany Leave and Work Policy
+
+**Fictional policy for the RAG demo.**
+
+## Annual leave
+- Standard annual leave entitlement: **28 working days per calendar year**.
+- Carry-forward limit: **5 days**.
+- Leave of more than 10 consecutive working days requires manager and HR approval.
+- Existing business-critical blackout periods may require additional approval.
+
+## Parental / maternity leave
+- Fictional maternity leave entitlement: **6 months**.
+- Fictional paternity/partner leave entitlement: **8 weeks**.
+- Parental leave must be administered using the employee's applicable jurisdiction.
+
+## Sick leave
+Paid sick leave subject to company policy and applicable German statutory rules.
+
+## Remote work
+- Temporary remote work outside the employee's base location must be recorded with People Operations.
+- Jurisdiction for leave and holiday questions follows the global jurisdiction policy.
+
+## Country-specific rule
+Employees based in Germany normally use this policy.
+
+
+[Context 5]
+Document ID: 66c2f0dcb70a7870c4c4f99a7b273487ce289c82404042eaccf08df2c653d3a8
+Chunk ID: 03124539861e45d0f012492b64a9ef2e46ac10bc5d4b892836f11d91c8f2a65c
+Content:
+Employment Agreement — Hannah Weber
+Employee ID: DE001
+Base location: Germany
+Department: Engineering
+Role: Senior Software Engineer
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 28 working days.
+Fictional maternity leave entitlement: 6 months.
+Fictional paternity/partner leave entitlement: 8 weeks.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+M53_TEST_CHANGE: temporary lifecycle validation.
+
+================================================================================
+QUERY 3
+================================================================================
+
+Query: Which maternity leave policy applies to a Sweden-based employee temporarily working in India?
+
+M8 candidates:        20
+M9 reranked:          20
+M9 final top-k:       5
+M10 context chunks:   5
+M10 context tokens:   931
+M10 budget utilization: 23.28%
+
+M10 CONTEXT CHUNKS
+--------------------------------------------------------------------------------
+[1] rank=1 score=7.235155 tokens=247
+    document_id=68a3a5b1875a437ea69a073c77199d49525da5b8448a71af25c121503fca2cd3
+    chunk_id=36a8e3333ad91f3a50105179013917ae1a766ea78767ab4970ecde660b8cb3ae
+    sequence=0
+    text='# RAG Demonstration Scenarios\n\nThese are manual demo questions, not a golden/evaluation dataset.\n\n1. Can Rahul Mehta take three weeks of annual leave in September while he is temporarily working in Germany?\n2. Which maternity leave policy applies to a Sweden-based employee temporarily working in Ind'
+
+[2] rank=2 score=6.280210 tokens=170
+    document_id=498ef35ee608aaae9557f427a56dd7bac7391053302f963ee0f410cd6ba316b8
+    chunk_id=ddcdc399244623b637ce304659cc8452a89f85a2a9f1dab143e1cd67617d4ba4
+    sequence=0
+    text='Employment Agreement — Karan Malhotra\nEmployee ID: IN007\nBase location: India\nDepartment: Security\nRole: Security Analyst\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days.\nFictional ma'
+
+[3] rank=3 score=6.266479 tokens=169
+    document_id=638910a3d33e019315725487b6b3bc713eeb9e3cb925d8a795099e556ecc0a5c
+    chunk_id=d0d1c6cbf511135a82538273ec676f8b8fb116260fb64ba3dc02f4e52a6d92cf
+    sequence=0
+    text='Employment Agreement — Ananya Iyer\nEmployee ID: IN004\nBase location: India\nDepartment: Product\nRole: Product Manager\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days.\nFictional materni'
+
+[4] rank=4 score=6.255613 tokens=171
+    document_id=df110b57e19ad552f96dee5ec23e3e8ac25dcc714d686a69ddc40efcf0cc5137
+    chunk_id=00f206ea4d386748b6616bd73f81b7c6c03c746d1723e5f20dda3b8b63504ad0
+    sequence=0
+    text='Employment Agreement — Vivek Menon\nEmployee ID: IN009\nBase location: India\nDepartment: Finance\nRole: Financial Controller\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days.\nFictional ma'
+
+[5] rank=5 score=6.194801 tokens=174
+    document_id=2249eda14d0d64c7316584a572f784896dd6e4b5c5e159d5de4c395aba6f9bd6
+    chunk_id=0642bbe782856e0e93d4c3d52e33441a238a92f5f2d387af7b4a4e7b649c9f88
+    sequence=0
+    text='Employment Agreement — Rahul Mehta\nEmployee ID: IN001\nBase location: India\nDepartment: Engineering\nRole: Senior Machine Learning Engineer\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working da'
+
+FORMATTED CONTEXT
+--------------------------------------------------------------------------------
+[Context 1]
+Document ID: 68a3a5b1875a437ea69a073c77199d49525da5b8448a71af25c121503fca2cd3
+Chunk ID: 36a8e3333ad91f3a50105179013917ae1a766ea78767ab4970ecde660b8cb3ae
+Content:
+# RAG Demonstration Scenarios
+
+These are manual demo questions, not a golden/evaluation dataset.
+
+1. Can Rahul Mehta take three weeks of annual leave in September while he is temporarily working in Germany?
+2. Which maternity leave policy applies to a Sweden-based employee temporarily working in India?
+3. How many annual leave days does Priya Shah receive, and is that different from the standard India policy?
+4. Why might Rohan Kapoor's December leave request require additional review?
+5. Can Jonas Wagner use German leave rules while temporarily assigned to Sweden?
+6. What happens to leave jurisdiction after a permanent transfer from India to Germany?
+7. Which holiday calendar should apply to an India-based employee temporarily working in Germany?
+8. Does being on a PIP remove an employee's right to annual leave?
+9. What additional approval does Oskar Berg need for very long leave?
+10. Compare annual leave and maternity leave entitlements across Sweden, Germany, and India.
+
+
+[Context 2]
+Document ID: 498ef35ee608aaae9557f427a56dd7bac7391053302f963ee0f410cd6ba316b8
+Chunk ID: ddcdc399244623b637ce304659cc8452a89f85a2a9f1dab143e1cd67617d4ba4
+Content:
+Employment Agreement — Karan Malhotra
+Employee ID: IN007
+Base location: India
+Department: Security
+Role: Security Analyst
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+[Context 3]
+Document ID: 638910a3d33e019315725487b6b3bc713eeb9e3cb925d8a795099e556ecc0a5c
+Chunk ID: d0d1c6cbf511135a82538273ec676f8b8fb116260fb64ba3dc02f4e52a6d92cf
+Content:
+Employment Agreement — Ananya Iyer
+Employee ID: IN004
+Base location: India
+Department: Product
+Role: Product Manager
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+[Context 4]
+Document ID: df110b57e19ad552f96dee5ec23e3e8ac25dcc714d686a69ddc40efcf0cc5137
+Chunk ID: 00f206ea4d386748b6616bd73f81b7c6c03c746d1723e5f20dda3b8b63504ad0
+Content:
+Employment Agreement — Vivek Menon
+Employee ID: IN009
+Base location: India
+Department: Finance
+Role: Financial Controller
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+Contract grants 5 additional annual leave days after each completed five-year service milestone.
+
+
+[Context 5]
+Document ID: 2249eda14d0d64c7316584a572f784896dd6e4b5c5e159d5de4c395aba6f9bd6
+Chunk ID: 0642bbe782856e0e93d4c3d52e33441a238a92f5f2d387af7b4a4e7b649c9f88
+Content:
+Employment Agreement — Rahul Mehta
+Employee ID: IN001
+Base location: India
+Department: Engineering
+Role: Senior Machine Learning Engineer
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+================================================================================
+QUERY 4
+================================================================================
+
+Query: Does being on a PIP remove an employee's right to annual leave?
+
+M8 candidates:        20
+M9 reranked:          20
+M9 final top-k:       5
+M10 context chunks:   5
+M10 context tokens:   835
+M10 budget utilization: 20.88%
+
+M10 CONTEXT CHUNKS
+--------------------------------------------------------------------------------
+[1] rank=1 score=4.318289 tokens=148
+    document_id=a98b954018c768cf217a721d1c066fd33416c2ac6b43b92c1d5eda5b5b9be9a5
+    chunk_id=d31ea3029c942026ccc8d99b1792eee2ba3b0368d6f28e30f2c2f488330b647e
+    sequence=0
+    text='# Performance Management and Extended Leave\n\nEmployees on a formal Performance Improvement Plan (PIP) retain their contractual and statutory leave rights.\n\nHowever, fictional company policy requires:\n- HR review for extended leave of more than 10 consecutive working days during an active PIP.\n- Depa'
+
+[2] rank=2 score=4.175523 tokens=247
+    document_id=68a3a5b1875a437ea69a073c77199d49525da5b8448a71af25c121503fca2cd3
+    chunk_id=36a8e3333ad91f3a50105179013917ae1a766ea78767ab4970ecde660b8cb3ae
+    sequence=0
+    text='# RAG Demonstration Scenarios\n\nThese are manual demo questions, not a golden/evaluation dataset.\n\n1. Can Rahul Mehta take three weeks of annual leave in September while he is temporarily working in Germany?\n2. Which maternity leave policy applies to a Sweden-based employee temporarily working in Ind'
+
+[3] rank=3 score=2.725002 tokens=154
+    document_id=2f9c9bf92ebca809e7ab5a87d1abc7f4e24d0c8bc536a6ae1233471db29b1212
+    chunk_id=317f2989cc22f7310a65de8995cfcd44e84dbedc2daa1f47d852a3ffb97ddfd4
+    sequence=0
+    text='# HR Notes — Rahul Mehta\nEmployee ID: IN001\n\nPerformance status: Formal Performance Improvement Plan (PIP)\nPIP effective date: 2026-07-01\nReview date: 2026-10-01\n\nHR comments:\nRahul has missed two delivery milestones and has recurring production-quality issues.\nAn extended leave request of more than'
+
+[4] rank=4 score=2.723340 tokens=203
+    document_id=714c5decb5bebce5b0a661424e7ebe01db3943272e7fa86a97048131e585c178
+    chunk_id=5b492cae415c883f2dbc724f3d72a7e314fd5c307d4903e8d324830fa3a48844
+    sequence=1
+    text='The employee then follows the policy of the new base country from the effective transfer date.\n\n### Contract precedence\nWhere an employment contract explicitly grants a more favorable entitlement, the contract-specific entitlement applies to that employee. Where a contract requires additional approv'
+
+[5] rank=5 score=1.833364 tokens=83
+    document_id=f656f55562e167d23d1d7175231aa7ae6c004f86db93a73118fda74492f96873
+    chunk_id=e3924098a9250f5837c87cb723e8ace06c74603392e661876b8a7b0839330cbc
+    sequence=0
+    text='# HR Notes — Maja Svensson\nEmployee ID: SE007\n\nPerformance status: Formal PIP\n\nHR comments:\nMaja is on a PIP related to delivery predictability.\nAny annual leave longer than 10 consecutive working days during the PIP requires HR review.\nMaja is Sweden-based. Swedish HQ policy remains applicable even'
+
+FORMATTED CONTEXT
+--------------------------------------------------------------------------------
+[Context 1]
+Document ID: a98b954018c768cf217a721d1c066fd33416c2ac6b43b92c1d5eda5b5b9be9a5
+Chunk ID: d31ea3029c942026ccc8d99b1792eee2ba3b0368d6f28e30f2c2f488330b647e
+Content:
+# Performance Management and Extended Leave
+
+Employees on a formal Performance Improvement Plan (PIP) retain their contractual and statutory leave rights.
+
+However, fictional company policy requires:
+- HR review for extended leave of more than 10 consecutive working days during an active PIP.
+- Department-head approval when an extended leave overlaps a critical delivery period.
+- Leave should not be described as denied solely because the employee is on PIP unless the source record explicitly says it was denied.
+
+This policy is intended to create realistic multi-document retrieval cases.
+
+
+[Context 2]
+Document ID: 68a3a5b1875a437ea69a073c77199d49525da5b8448a71af25c121503fca2cd3
+Chunk ID: 36a8e3333ad91f3a50105179013917ae1a766ea78767ab4970ecde660b8cb3ae
+Content:
+# RAG Demonstration Scenarios
+
+These are manual demo questions, not a golden/evaluation dataset.
+
+1. Can Rahul Mehta take three weeks of annual leave in September while he is temporarily working in Germany?
+2. Which maternity leave policy applies to a Sweden-based employee temporarily working in India?
+3. How many annual leave days does Priya Shah receive, and is that different from the standard India policy?
+4. Why might Rohan Kapoor's December leave request require additional review?
+5. Can Jonas Wagner use German leave rules while temporarily assigned to Sweden?
+6. What happens to leave jurisdiction after a permanent transfer from India to Germany?
+7. Which holiday calendar should apply to an India-based employee temporarily working in Germany?
+8. Does being on a PIP remove an employee's right to annual leave?
+9. What additional approval does Oskar Berg need for very long leave?
+10. Compare annual leave and maternity leave entitlements across Sweden, Germany, and India.
+
+
+[Context 3]
+Document ID: 2f9c9bf92ebca809e7ab5a87d1abc7f4e24d0c8bc536a6ae1233471db29b1212
+Chunk ID: 317f2989cc22f7310a65de8995cfcd44e84dbedc2daa1f47d852a3ffb97ddfd4
+Content:
+# HR Notes — Rahul Mehta
+Employee ID: IN001
+
+Performance status: Formal Performance Improvement Plan (PIP)
+PIP effective date: 2026-07-01
+Review date: 2026-10-01
+
+HR comments:
+Rahul has missed two delivery milestones and has recurring production-quality issues.
+An extended leave request of more than 10 consecutive working days during the active PIP requires HR review.
+Rahul is temporarily assigned to Germany from 2026-09-14 through 2026-09-25. For an India-based employee, the host-country exception applies during this temporary assignment.
+The PIP does not remove Rahul's contractual or statutory leave rights.
+
+
+[Context 4]
+Document ID: 714c5decb5bebce5b0a661424e7ebe01db3943272e7fa86a97048131e585c178
+Chunk ID: 5b492cae415c883f2dbc724f3d72a7e314fd5c307d4903e8d324830fa3a48844
+Content:
+The employee then follows the policy of the new base country from the effective transfer date.
+
+### Contract precedence
+Where an employment contract explicitly grants a more favorable entitlement, the contract-specific entitlement applies to that employee. Where a contract requires additional approval, that approval is required.
+
+### PIP / performance management
+A performance-management note may require HR or executive review for extended leave. It does not remove statutory or contractual leave rights.
+
+## Examples
+- Sweden employee working in India for two weeks -> Swedish policy.
+- India employee working in Germany for two weeks -> German policy.
+- Germany employee working in India for two weeks -> Indian policy.
+- India employee permanently transferred to Germany -> German policy after transfer date.
+
+
+[Context 5]
+Document ID: f656f55562e167d23d1d7175231aa7ae6c004f86db93a73118fda74492f96873
+Chunk ID: e3924098a9250f5837c87cb723e8ace06c74603392e661876b8a7b0839330cbc
+Content:
+# HR Notes — Maja Svensson
+Employee ID: SE007
+
+Performance status: Formal PIP
+
+HR comments:
+Maja is on a PIP related to delivery predictability.
+Any annual leave longer than 10 consecutive working days during the PIP requires HR review.
+Maja is Sweden-based. Swedish HQ policy remains applicable even if Maja temporarily works abroad.
+
+
+================================================================================
+QUERY 5
+================================================================================
+
+Query: Compare annual leave and maternity leave entitlements across Sweden, Germany, and India.
+
+M8 candidates:        20
+M9 reranked:          20
+M9 final top-k:       5
+M10 context chunks:   5
+M10 context tokens:   925
+M10 budget utilization: 23.12%
+
+M10 CONTEXT CHUNKS
+--------------------------------------------------------------------------------
+[1] rank=1 score=5.518885 tokens=247
+    document_id=68a3a5b1875a437ea69a073c77199d49525da5b8448a71af25c121503fca2cd3
+    chunk_id=36a8e3333ad91f3a50105179013917ae1a766ea78767ab4970ecde660b8cb3ae
+    sequence=0
+    text='# RAG Demonstration Scenarios\n\nThese are manual demo questions, not a golden/evaluation dataset.\n\n1. Can Rahul Mehta take three weeks of annual leave in September while he is temporarily working in Germany?\n2. Which maternity leave policy applies to a Sweden-based employee temporarily working in Ind'
+
+[2] rank=2 score=4.985309 tokens=171
+    document_id=df110b57e19ad552f96dee5ec23e3e8ac25dcc714d686a69ddc40efcf0cc5137
+    chunk_id=00f206ea4d386748b6616bd73f81b7c6c03c746d1723e5f20dda3b8b63504ad0
+    sequence=0
+    text='Employment Agreement — Vivek Menon\nEmployee ID: IN009\nBase location: India\nDepartment: Finance\nRole: Financial Controller\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days.\nFictional ma'
+
+[3] rank=3 score=4.981399 tokens=169
+    document_id=638910a3d33e019315725487b6b3bc713eeb9e3cb925d8a795099e556ecc0a5c
+    chunk_id=d0d1c6cbf511135a82538273ec676f8b8fb116260fb64ba3dc02f4e52a6d92cf
+    sequence=0
+    text='Employment Agreement — Ananya Iyer\nEmployee ID: IN004\nBase location: India\nDepartment: Product\nRole: Product Manager\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days.\nFictional materni'
+
+[4] rank=4 score=4.933236 tokens=168
+    document_id=e5ce5dd16d3b4933d1f8e31bc8aff01188737a68a1e9778fb8b4c14788df8678
+    chunk_id=6d9e56c91ae081d2f21b69be9c326ab87c315f137edb8c864ba3ecdb79788ece
+    sequence=0
+    text='Employment Agreement — Priya Shah\nEmployee ID: IN002\nBase location: India\nDepartment: People Operations\nRole: People Operations Manager\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days'
+
+[5] rank=5 score=4.894625 tokens=170
+    document_id=498ef35ee608aaae9557f427a56dd7bac7391053302f963ee0f410cd6ba316b8
+    chunk_id=ddcdc399244623b637ce304659cc8452a89f85a2a9f1dab143e1cd67617d4ba4
+    sequence=0
+    text='Employment Agreement — Karan Malhotra\nEmployee ID: IN007\nBase location: India\nDepartment: Security\nRole: Security Analyst\nThis is a fictional employment contract created solely for a RAG demonstration.\nLeave and benefits:\nThe standard country annual leave entitlement is 24 working days.\nFictional ma'
+
+FORMATTED CONTEXT
+--------------------------------------------------------------------------------
+[Context 1]
+Document ID: 68a3a5b1875a437ea69a073c77199d49525da5b8448a71af25c121503fca2cd3
+Chunk ID: 36a8e3333ad91f3a50105179013917ae1a766ea78767ab4970ecde660b8cb3ae
+Content:
+# RAG Demonstration Scenarios
+
+These are manual demo questions, not a golden/evaluation dataset.
+
+1. Can Rahul Mehta take three weeks of annual leave in September while he is temporarily working in Germany?
+2. Which maternity leave policy applies to a Sweden-based employee temporarily working in India?
+3. How many annual leave days does Priya Shah receive, and is that different from the standard India policy?
+4. Why might Rohan Kapoor's December leave request require additional review?
+5. Can Jonas Wagner use German leave rules while temporarily assigned to Sweden?
+6. What happens to leave jurisdiction after a permanent transfer from India to Germany?
+7. Which holiday calendar should apply to an India-based employee temporarily working in Germany?
+8. Does being on a PIP remove an employee's right to annual leave?
+9. What additional approval does Oskar Berg need for very long leave?
+10. Compare annual leave and maternity leave entitlements across Sweden, Germany, and India.
+
+
+[Context 2]
+Document ID: df110b57e19ad552f96dee5ec23e3e8ac25dcc714d686a69ddc40efcf0cc5137
+Chunk ID: 00f206ea4d386748b6616bd73f81b7c6c03c746d1723e5f20dda3b8b63504ad0
+Content:
+Employment Agreement — Vivek Menon
+Employee ID: IN009
+Base location: India
+Department: Finance
+Role: Financial Controller
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+Contract grants 5 additional annual leave days after each completed five-year service milestone.
+
+
+[Context 3]
+Document ID: 638910a3d33e019315725487b6b3bc713eeb9e3cb925d8a795099e556ecc0a5c
+Chunk ID: d0d1c6cbf511135a82538273ec676f8b8fb116260fb64ba3dc02f4e52a6d92cf
+Content:
+Employment Agreement — Ananya Iyer
+Employee ID: IN004
+Base location: India
+Department: Product
+Role: Product Manager
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+[Context 4]
+Document ID: e5ce5dd16d3b4933d1f8e31bc8aff01188737a68a1e9778fb8b4c14788df8678
+Chunk ID: 6d9e56c91ae081d2f21b69be9c326ab87c315f137edb8c864ba3ecdb79788ece
+Content:
+Employment Agreement — Priya Shah
+Employee ID: IN002
+Base location: India
+Department: People Operations
+Role: People Operations Manager
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+Contract grants 26 annual leave days instead of the standard India 24.
+
+
+[Context 5]
+Document ID: 498ef35ee608aaae9557f427a56dd7bac7391053302f963ee0f410cd6ba316b8
+Chunk ID: ddcdc399244623b637ce304659cc8452a89f85a2a9f1dab143e1cd67617d4ba4
+Content:
+Employment Agreement — Karan Malhotra
+Employee ID: IN007
+Base location: India
+Department: Security
+Role: Security Analyst
+This is a fictional employment contract created solely for a RAG demonstration.
+Leave and benefits:
+The standard country annual leave entitlement is 24 working days.
+Fictional maternity leave entitlement: 3 months.
+Fictional paternity/partner leave entitlement: 15 days.
+Jurisdiction:
+The employee follows the global HR jurisdiction policy for temporary international work.
+Sweden-based employees remain under Swedish HQ policy globally.
+Special contractual terms:
+No special leave entitlement or leave-specific approval override is included in this agreement.
+
+
+================================================================================
+PASS
+================================================================================
