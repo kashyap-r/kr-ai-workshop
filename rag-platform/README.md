@@ -32,3 +32,8 @@ Kashyap's Enterprise RAG Protoype Project — Master To-Do
 | **M23**    | Production RAG               | Complete production architecture and operating model             | ⬜              |
 | **M24**    | Advanced RAG                 | Agentic retrieval, corrective RAG, adaptive RAG, graph RAG, etc. | ⬜              |
 | **M25**    | RAG + Agents                 | Agents, MCP, A2A, tool use, multi-agent RAG systems              | ⬜              |
+
+
+
+------------------------------------------------
+
