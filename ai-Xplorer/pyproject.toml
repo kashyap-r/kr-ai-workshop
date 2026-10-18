@@ -1,0 +1,15 @@
+[project]
+name = "ai-xplorer-workspace"
+version = "0.1.0"
+description = "Root workspace for AI POCs"
+readme = "README.md"
+authors = [
+    { name = "Kashyap Rajpurohit", email = "kashyap.rajpurohit@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv]
+managed = true
+# This links your projects together
+workspace = { members = ["common_lib", "xplore-*"] } 

@@ -1,0 +1,26 @@
+[project]
+name = "xplore-llms"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Kashyap Rajpurohit", email = "kashyap.rajpurohit@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "common-lib",
+]
+
+[project.scripts]
+xplore-llms = "xplore_llms:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+discovery = false
+
+[tool.uv.sources]
+common-lib = { workspace = true, editable = true }

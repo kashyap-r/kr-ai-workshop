@@ -1,0 +1,205 @@
+creating the Virtual env
+
+
+Step 1: Navigate to your new project folder
+
+Open your terminal and change your directory directly into the new ai-Xplorer folder so that uv knows exactly where to place the environment:
+
+cd /path/to/kr-ai-workshop/ai-Xplorer
+
+
+
+Step 2: Create the virtual environment
+
+Run the uv venv command. By default, this creates a hidden .venv folder inside your current ai-Xplorer directory, completely isolated from your other workshop projects:
+
+uv venv
+
+
+Step 3: Activate the environment
+
+To start installing packages or running your use cases inside this specific environment, run the activation command:
+
+source .venv/bin/activate
+
+
+Step 4: Install your packages
+
+Now you can install whatever libraries you need for your new POCs. For instance:
+
+uv pip install langchain openai pandas
+
+
+NOte: Make sure you add .venv to your gitignore file. You can run this command while inside the ai-Xplorer directory to create a local ignore file just for this folder:
+
+echo ".venv/" >> .gitignore
+
+Step 5:
+To manage your ai-Xplorer POCs using a pyproject.toml file, you can utilize uv's native project management features. This approach tracks your dependencies systematically, allowing you to easily share or recreate the environment later.
+
+
+1: Navigate and Initialize the Project
+
+Navigate into your folder and run the uv init command. This automatically generates a basic pyproject.toml configuration and an environment template:
+
+cd /path/to/kr-ai-workshop/ai-Xplorer
+uv init --app
+
+2: What uv Just Created
+
+Inside your ai-Xplorer directory, uv will have instantly generated:
+• pyproject.toml: The configuration file where your project metadata and dependencies live.
+• hello.py: A dummy script to test running your code.
+• .gitignore: A local ignore file that automatically keeps your environment files out of GitHub.
+
+
+3: Add Your Dependencies
+
+Instead of manually activating the environment and running pip install, you now let uv handle everything. Use uv add to declare a dependency:
+
+uv add openai langchain pandas
+
+4. Running Your Code
+
+With a pyproject.toml workspace setup, you don't even need to manually run source .venv/bin/activate anymore. You can execute any script using uv run, and it will implicitly use the correct isolated virtual environment:
+
+uv run hello.py
+
+
+The target environment setup will look like this:
+
+ai-Xplorer/
+├── pyproject.toml        # Workspace root configuration
+├── common_lib/           # Your shared utility package
+│   ├── pyproject.toml
+│   └── src/common_lib/__init__.py
+├── sub_project_1/        # Isolated POC 1
+│   ├── .venv/            # Isolated environment for this demo
+│   └── pyproject.toml
+└── sub_project_2/        # Isolated POC 2
+    ├── .venv/            # Isolated environment for this demo
+    └── pyproject.toml
+
+To achieve this, follow the below steps:
+
+Step 1. Configure the root workspace
+
+In your root ai-Xplorer/pyproject.toml file, you need to tell uv that this folder acts as a container for multiple independent projects. Update your root pyproject.toml to look like this:
+
+
+Step 2: Create the common library package
+Inside ai-Xplorer, initialize your shared library as a local buildable package:
+
+uv init --lib common_lib
+
+This creates a common_lib folder. Its internal pyproject.toml will look something like this natively:
+
+[project]
+name = "common-lib"
+version = "0.1.0"
+dependencies = [] # Add core dependencies used by your common functions here
+
+(You can now place your reusable utility functions inside common_lib/src/common_lib/).
+
+
+Step 3: Create a Sub-Project with its Own Environment
+
+When you want to spin up a new isolated use case (e.g., sub_project_1), run:
+
+uv init --app sub_project_1
+
+uv init --app xplore-llms
+
+To give this sub-project its own completely independent virtual environment and prevent uv from merging it into a single root environment, you must explicitly declare it as an isolated workspace project. Open sub_project_1/pyproject.toml and add the workspace.discovery = false flag at the bottom:
+
+
+Step 4: 
+Enforce Isolation for xplore-llms
+
+As discussed earlier, to make sure this sub-project gets its own tiny, isolated environment instead of sharing the root one:
+1. Open the newly created xplore-llms/pyproject.toml file.
+2. Add this block to the very bottom of the file:
+
+[tool.uv]
+workspace = { discovery = false }
+
+
+Step 5: 
+Link the Common Lib and Install
+
+Navigate into your sub-project folder: cd sub_project_1
+
+Now, instruct uv to look for your common-lib locally in the workspace, rather than searching the public internet (PyPI). Run:
+uv add common-lib --editable
+
+Note: The --editable flag ensures that if you edit a file inside common_lib, the changes instantly work in sub_project_1 without running an update command.
+If you want to add other external packages unique to this demo (e.g., a specific version of OpenAI):
+
+uv add openai
+
+
+
+How to Demo/Run the Sub-Project Separately
+
+Because we used workspace = { discovery = false }, uv creates a localized .venv right inside sub_project_1/.
+To run or demo this specific project seamlessly:
+
+cd sub_project_1
+uv run python your_script.py
+
+
+1. The directory Structure for the common_lib 
+
+When you ran uv init --lib common_lib, it automatically created a src directory structure. Ensure your files are organized exactly like this:
+
+common_lib/
+├── pyproject.toml
+└── src/
+    └── common_lib/
+        ├── __init__.py       # The gatekeeper for your functions
+        └── llm_utils.py      # A file containing actual helper code
+
+
+
+2. The Code Inside common_lib
+
+File 1: common_lib/src/common_lib/llm_utils.py
+Put your actual reusable functions here.
+
+File 2: common_lib/src/common_lib/__init__.py
+This file acts as the public interface. You must import your functions here so they can be accessed cleanly outside the package.
+
+
+3. How to Link it to xplore-llms
+
+Now that your library structure is ready, run these two commands in your terminal to link it to your sub-project
+
+cd /Users/kashyaprajpurohit/myGitHubRepos/kr-ai-workshop/ai-Xplorer/xplore-llms
+uv add ../common_lib --editable
+
+
+4. How to Import it inside xplore-llms
+
+Now, you can create a script inside your xplore-llms folder (e.g., main.py) and import your library cleanly using standard Python syntax:
+
+# xplore-llms/main.py
+from common_lib import get_ai_response
+
+def run_demo():
+    result = get_ai_response("Hello from the sub-project POC!")
+    print(result)
+
+if __name__ == "__main__":
+    run_demo()
+
+To run this isolated script using its own environment, just type:
+uv run python main.py
+
+uv run --active python src/xplore_llms/main.py
+
+
+
+
+
+
+
