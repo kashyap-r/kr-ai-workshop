@@ -26,3 +26,10 @@
 
 6. POC: Budget Forcing - pushing a Reasoning model to think longer / think more before responding? Can you build a POC
 
+7. Finetuning Models 
+
+8. Build a tokenizer to check / see how different LLMs breakdown text into tokens 
+
+9. What is an Entity / Entity Relationship ? Can you produce POCs of a few models do comparitive study .. display them on a KNowledge Graph 
+
+10. Difference between NLP models and LLMs 
