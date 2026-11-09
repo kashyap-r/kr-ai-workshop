@@ -90,3 +90,5 @@ Capture:
     Parser limitations, especially scanned/OCR PDFs
     Testing strategy
     Deferred improvements
+
+    
